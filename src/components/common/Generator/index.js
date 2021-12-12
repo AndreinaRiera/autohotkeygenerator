@@ -304,7 +304,7 @@ export default function Generator({ listActivators, listActions, setListActivato
 	var [activatorKeys, setActivatorKeys] = useState([]);
 
 
-
+	
 
 	const [stateActivator, setStateActivator] = useState(listActivatorsObj.list[0]);
 
@@ -350,7 +350,10 @@ export default function Generator({ listActivators, listActions, setListActivato
 
 
 
-
+	useEffect(() => {
+		setStateActivator(listActivatorsObj.list[0]);
+		setStateAction(listActionsObj.list[0]);
+	}, []);
 
 
 
