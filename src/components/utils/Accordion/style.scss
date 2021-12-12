@@ -1,0 +1,34 @@
+.accordion{
+    .card-header{
+        button{
+            box-shadow: none !important;
+            text-decoration: none !important;
+            font-weight: bold;
+
+            &:not(.collapsed){
+                color: black !important;
+            }
+
+            &.collapsed{
+                .arrow{
+                    transform: rotate(180deg);
+                }
+            }
+
+            &:hover{
+                text-decoration: none !important;
+                color: black !important;
+            }
+
+            .arrow{
+                position: absolute;
+                top: 0;
+                right: 0;
+                margin: 10px 20px;
+                font-size: 25px;
+                padding-top: 10px;
+                transition: transform 0.3s linear;
+            }
+        }
+    }
+}
