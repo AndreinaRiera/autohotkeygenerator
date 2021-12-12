@@ -1,5 +1,5 @@
 import "./style.scss";
-import MainNavbar from "../Navbar/index.jsx";
+import MainNavbar from "../Navbar";
 import { PopoverBootstrap } from "../../utils/Popover";
 import React from "react";
 

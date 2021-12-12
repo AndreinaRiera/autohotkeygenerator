@@ -1,9 +1,15 @@
+html,
+body {
+    overflow-x: hidden;
+}
 
-#App{
-    .step{
+
+#App {
+    .step {
         margin: 10px 0;
     }
-    .number{
+
+    .number {
         font-weight: bold;
         font-size: 3rem;
         line-height: 3.2rem;
@@ -11,12 +17,12 @@
         color: #129d90;
     }
 
-    .btn_download{
+    .btn_download {
         margin-top: 20px;
         background-color: #0c756a;
     }
 
-    #containerApp{
+    #containerApp {
         padding-bottom: 100px;
     }
 }

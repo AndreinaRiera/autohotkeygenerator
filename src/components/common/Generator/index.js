@@ -5,6 +5,7 @@ import { Scroll } from "../../utils/Scroll";
 import Options from "../../utils/Options";
 
 import {createFile, downloadFile} from "../../../utils/utils";
+import {swalDelete} from "../../../utils/swalFire";
 
 //import Modal from "../../utils/Modal";
 import InputKeyPress from "./InputKeyPress";
@@ -50,7 +51,7 @@ export default function Generator({ listActivators, listActions, setListActivato
 		list: [
 			{
 				placeholder: "esto",
-				description: <>El evento se activara cuando escribas la palabra o frase y luego un caracter final, como punto o coma</>,
+				description: <>El evento se activara cuando escribas la palabra o frase y luego un <Scroll to="#ending_characters" accordion>caracter final</Scroll>, como punto o coma</>,
 				selectValue: "text",
 				optionDescription: "Al escribir",
 				defaultValue: true,
@@ -113,6 +114,7 @@ export default function Generator({ listActivators, listActions, setListActivato
 		]
 	};
 
+
 	var listActionsObj = {
 		defaultValues: {
 			placeholder: "esto",
@@ -129,18 +131,18 @@ export default function Generator({ listActivators, listActions, setListActivato
 				optionDescription: "Suplantar por",
 				defaultValue     : true,
 				optgroup         : 1,
-				key              : "SendInput",
+				key              : "SendRaw",
 				result: ({ action }, defaultVale) => {
-					return "SendInput" + includeActionText(action ? action.text : defaultVale);
+					return "SendRaw" + includeActionText(action ? action.text : defaultVale, false);
 				}
 			}, {
 				description      : <>El texto que elijas se escribira automaticamente</>,
 				selectValue      : "write",
 				optionDescription: "Escribir",
 				optgroup         : 1,
-				key              : "Send",
+				key              : "SendRaw",
 				result: ({ action }, defaultVale) => {
-					return "Send" + includeActionText(action ? action.text : defaultVale);
+					return "SendRaw" + includeActionText(action ? action.text : defaultVale, false);
 				}
 			}, {
 				placeholder      : "¡Hola! soy una ventana emergente",
@@ -206,11 +208,16 @@ export default function Generator({ listActivators, listActions, setListActivato
 	};
 
 	function includeActionText(actionText, changeStrValues = true, changeStrQuotes = false) {
+		// caracteres literales (para que no se confundan con teclas)
 		if(changeStrValues){
-			["#", "^", "!", "+", "<^>!", "Delete"].forEach(key => {
+			["#", "^", "!", "+", "<^>!", "Delete", "{", "}"].forEach(key => {
 				actionText = actionText.replaceAll(key, `{${key}}`);
 			});
-		}
+		} 
+		// saltos de linea
+		actionText = actionText.replace(/(?:\r\n|\r|\n)/g, ' `n ');
+		// tab
+		actionText = actionText.replace(/\t/g, ' `t ');
 
 		if(changeStrQuotes){
 			actionText = actionText.replaceAll("\"", "")
@@ -325,8 +332,6 @@ export default function Generator({ listActivators, listActions, setListActivato
 
 
 
-
-
 	const [stateAction, setStateAction] = useState(listActionsObj.list[0]);
 
 	const _handleChangeActionText = function (e, value = "") {
@@ -349,24 +354,6 @@ export default function Generator({ listActivators, listActions, setListActivato
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	const LINE_BREAK = "\n";
 
 	const [listHotKeys, setListHotKeys_] = useState([]);
@@ -376,13 +363,22 @@ export default function Generator({ listActivators, listActions, setListActivato
 			setListHotKeys_(odlListHotKeys => ([...odlListHotKeys, addThis]));
 		},
 		remove: function (id) {
-			setListHotKeys_(odlListHotKeys => (odlListHotKeys.filter((element, index) => { return index !== id; })));
+			swalDelete({
+				text: "¿Estas seguro de borrar este hotkey?",
+				title: ""
+			}).then(confirm => {
+				if(confirm){
+					setListHotKeys_(odlListHotKeys => (odlListHotKeys.filter((element, index) => { return index !== id; })));
+				}
+			}).catch(err => {
+				console.error(err);
+			});
+			
 		},
 		generateFile: function () {
 			var result = listHotKeys.map(hotKey => hotKey.result).join(LINE_BREAK + LINE_BREAK);
 			downloadFile(createFile(result), "myHotkeys.ahk");
-			
-			//setStateModal(true);
+			console.log(result);
 		}
 	};
 
@@ -531,6 +527,16 @@ export default function Generator({ listActivators, listActions, setListActivato
 														required={stateAction.required || listActionsObj.defaultValues.required} 
 														disabled={stateAction.hideInput ? true : false}
 													/>
+													{/* <textarea 
+														style={{height: (stateAction.heightInput || 34+"px")}} 
+														name="action_text" 
+														value={stateAction.value || ""}
+														onChange={_handleChangeActionText}
+														placeholder={stateAction.placeholder || listActionsObj.defaultValues.placeholder}
+														className={`form-control ${(stateAction.readOnly || listActionsObj.defaultValues.readOnly) ? "readonly" : ""}`} 
+														required={stateAction.required || listActionsObj.defaultValues.required} 
+														disabled={stateAction.hideInput ? true : false}
+													>{stateAction.value || ""}</textarea> */}
 												</div>
 												<div className={`col-auto pl-0 ${stateAction.buttonClick ? "" : "d-none"}`}>
 													<button type="button" className={`btn ${stateDetectionCursor ? "btn-success detecting" : "btn-secondary"}  btn_detect`} onClick={trackCursor} >{stateDetectionCursor ? "Esperando click" : "Detectar"}</button>
@@ -577,7 +583,15 @@ export default function Generator({ listActivators, listActions, setListActivato
 												<p className="p-0 m-0">{hotKey.action.description}  {hotKey.action.text ? '"'+hotKey.action.text+'"' : ""}</p>
 											</div>
 											<div className="col-auto">
-												<button type="button" onClick={() => { setListHotKeys.remove(index); }} className="btn btn-sm btn-light"> <i className="fas fa-trash"></i></button>
+												<div class="dropdown">
+													<button class="btn btn-light dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+													<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+														<a class="dropdown-item" onClick={() => { setListHotKeys.remove(index); }} >
+															<i className="fas fa-trash mr-2"></i>
+															Borrar
+														</a>
+													</div>
+												</div>
 											</div>
 										</div>
 									</li>

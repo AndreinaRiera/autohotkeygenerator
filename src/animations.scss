@@ -1,19 +1,19 @@
-@mixin animate($animation, $duration, $method: 'ease', $fill: both) {
+@mixin animate($animation, $duration, $method: ease, $fill: both) {
   animation-name: $animation;
-  animation-duration: $duration + "s";
+  animation-duration: $duration + s;
   animation-timing-function: $method;
   animation-fill-mode: $fill;
 
   &[data-animation-duration] {
-    animation-duration: attr(animation-duration) + "s";
+    animation-duration: attr(animation-duration) + s;
   }
 
   &.animation-slow {
-    animation-duration: ($duration * 0.6) + "s";
+    animation-duration: ($duration * 0.6) + s;
   }
 
   &.animation-fast {
-    animation-duration: ($duration * 1.3) + "s";
+    animation-duration: ($duration * 1.3) + s;
   }
 }
 

@@ -25,7 +25,7 @@ export default function FAQ() {
                                     </div>
                                 </div>
                             </Card>
-                            <Card numb="2" id="" title="¿Que son los caracteres finales y cuales son? ">
+                            <Card numb="2" id="ending_characters" title="¿Que son los caracteres finales y cuales son? ">
                                 <div className="row">
                                     <div className="col pt-md-4">
                                         <Quote cite="AutoHotKey official doc" url="https://www.autohotkey.com/docs/Hotstrings.htm#EndChars" >
