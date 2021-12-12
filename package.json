@@ -1,6 +1,10 @@
 {
   "name": "autohotkeyfan",
   "version": "0.1.0",
+  "engines": {
+    "node": "14.17.4",
+    "npm": "8.1.4"
+  },
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.1",
