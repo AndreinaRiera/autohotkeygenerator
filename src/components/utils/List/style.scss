@@ -1,0 +1,17 @@
+@import '../../../styles/variables';
+
+ol.numeric_awesome {
+    list-style: none;
+    counter-reset: my-awesome-counter;
+  
+    li {
+      counter-increment: my-awesome-counter;
+  
+      &::before {
+        content: counter(my-awesome-counter) ". ";
+        color: $color-secondary-dark;
+        font-size: 18px;
+        font-weight: bold;
+      }
+    }
+  }

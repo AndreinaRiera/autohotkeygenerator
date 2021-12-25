@@ -1,16 +1,14 @@
+@import 'variables';
+
 @import url('https://fonts.googleapis.com/css2?family=Crimson+Pro&family=Open+Sans&display=swap');
 
 
+.listbox{
+  width: 3000px !important;
+}
 
 /* TEMPLATE STYLES  */
 
-$color-primary: #202d3c;
-$color-primary-dark: #03060a;
-$color-primary-light: #4a6385;
-
-$color-secondary: #129d90;
-$color-secondary-dark: #086158;
-$color-secondary-light: #97bfbb;
 
 :root {
   box-sizing: content-box;
@@ -66,6 +64,10 @@ figure {
 
 .pointer {
   cursor: pointer;
+}
+
+.help{
+  cursor: help;
 }
 
 .icons-absolute {
@@ -142,21 +144,7 @@ figure {
 
 
 
-ol.numeric_awesome {
-  list-style: none;
-  counter-reset: my-awesome-counter;
 
-  li {
-    counter-increment: my-awesome-counter;
-
-    &::before {
-      content: counter(my-awesome-counter) ". ";
-      color: $color-secondary-dark;
-      font-size: 18px;
-      font-weight: bold;
-    }
-  }
-}
 
 
 
@@ -177,11 +165,6 @@ ol.numeric_awesome {
 }
 
 
-
-
-.bootstrap-select {
-  width: 100% !important;
-}
 
 
 
@@ -275,35 +258,12 @@ ol.numeric_awesome {
 
 
 
-.carousel.carousel-text {
-  .carousel-inner {
 
-    .carousel-caption {
-      position: relative;
-      bottom: 0;
-      right: 0;
-      left: 0;
-      padding-top: 10px;
-      padding-bottom: 10px;
 
-      h1,
-      h2,
-      h3,
-      h4,
-      h5,
-      p {
-        margin: 0;
-        padding: 0;
-      }
-    }
-  }
 
-  .carousel-control-next,
-  .carousel-control-prev {
-    z-index: 10;
-  }
 
-}
+/* PLUGINS */
+
 
 
 

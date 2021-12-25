@@ -22,10 +22,12 @@ export default function Animate(props) {
         }
     }, [isVisible])
 
+    var CustomElement = (props.hasOwnProperty('element') && props.element) ? props.element : 'div';
+
     return (
-        <div ref={ref} {...props} className={` ${animated} ${props.className}`}>
+        <CustomElement ref={ref} style={{margin:'0 !important', padding: '0 !important'}} {...props} className={` element_animation ${animated} ${props.className}`}>
             {props.children}
-        </div>
+        </CustomElement>
     )
-}
+} 
  

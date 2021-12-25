@@ -1,0 +1,28 @@
+.carousel.carousel-text {
+    .carousel-inner {
+  
+      .carousel-caption {
+        position: relative;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        padding-top: 10px;
+        padding-bottom: 10px;
+  
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        p {
+          margin: 0;
+          padding: 0;
+        }
+      }
+    }
+  
+    .carousel-control-next,
+    .carousel-control-prev {
+      z-index: 10;
+    }
+}

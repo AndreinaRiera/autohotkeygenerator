@@ -1,0 +1,14 @@
+{
+  "navbar": {
+    "generator" : "Crear",
+    "contact"   : "Contactos",
+    "navbarText": {
+      "label": "Un minuto ahorrado cada hora, son 146 horas al año",
+      "swal" : {
+        "title"            : "¡Es cierto, mira!",
+        "confirmButtonText": "oh, es cierto. Gracias",
+        "html"             : "1 minuto cada hora * 24 horas al dia = <strong>24 minutos</strong> <br> * 365 dias del año = <strong>8.760 minutos</strong> <br> / 60 minutos cada hora = <strong>146 horas</strong>"
+      }
+    }
+  }
+}

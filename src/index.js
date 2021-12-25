@@ -1,12 +1,14 @@
-import "./index.scss";
-import "./animations.scss";
+import "./styles/index.scss";
+import "./styles/animations.scss";
 
 //import React from 'react';
 import ReactDOM from "react-dom";
 import Home from "./pages/Home/";
 import reportWebVitals from "./reportWebVitals";
 
-import {linkScroll} from "./utils/utils.js";
+import './i18n/i18n';
+
+//import {linkScroll} from "./utils/utils.js";
 
 ReactDOM.render(
 	//<React.StrictMode>
@@ -15,7 +17,7 @@ ReactDOM.render(
 	document.getElementById("root")
 );
 
-linkScroll();
+//linkScroll();
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

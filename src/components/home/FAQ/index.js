@@ -2,6 +2,7 @@ import './style.scss';
 import {Accordion, Card} from '../../utils/Accordion';
 import {Quote}   from '../../utils/Quote';
 import { Scroll } from '../../utils/Scroll';
+import { NumericList } from '../../utils/List';
 
 export default function FAQ() {
     return (
@@ -13,12 +14,12 @@ export default function FAQ() {
                             <Card numb="1" id="Know_which_is_the_path_and_name_of_programs" title="¿Como saber la ruta y nombre de un programa? ">
                                 <div className="row">
                                     <div className="col pt-md-4">
-                                        <ol className="numeric_awesome">
+                                        <NumericList>
                                             <li>Haz click en el <strong>icono de window</strong> y dentro de la barra de busqueda escribe el <strong>nombre del programa</strong></li>
                                             <li>Luego haga click derecho sobre el programa y seleccion <strong>"Abrir ubicacion del archivo"</strong></li>
                                             <li>Se te abrira una ventana del explorador de archivo, con el acceso directo al programa seleccionado. Haga <strong>click derecho</strong> sobre el y seleccion la opcion <strong>"Propiedades"</strong></li>
                                             <li>En la pestaña <strong>"Acceso directo"</strong> copie el contenido dentro de la opcion <strong>"Destino"</strong>. Eso contiene la ruta y nombre del programa. </li>
-                                        </ol>
+                                        </NumericList>
                                     </div>
                                     <div  className="col-5 d-none d-md-block">
                                          <img src="/images/search_program.png" with="100%" alt="Imagen sobre pantalla de computadora" />

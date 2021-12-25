@@ -50,6 +50,33 @@ export function htmlEntities(str) {
 }
 
 
+export function stringStartsWith(URL, word) {
+   var words = word.isArray ? word : [word];
+       URL   = URL.toUpperCase();
+
+   words.forEach(word => {
+      if(URL.startsWith(word.toUpperCase)){
+         return true;
+      }
+   });
+
+   return false;
+}
+
+export function isValidURL(URL) {
+   if(stringStartsWith(URL, ['https:', 'http:', 'www.'])){
+      return true;
+   }
+
+   return false;
+}
+
+
+
+
+
+
+
 
 // @1 PORTAPAPELES
 
@@ -101,3 +128,14 @@ export function downloadFile(href, name) {
     a.download = name;
     a.click();
 }
+
+
+
+// REDIRECCIONAMIENTO
+
+export function openURL(URL, blank = "_blank") {
+   if(URL){
+      window.open(URL, blank);
+   }
+}
+

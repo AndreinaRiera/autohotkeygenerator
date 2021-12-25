@@ -1,6 +1,16 @@
-#Generator{
+#Generator {
+
+    // Modificar este estilo al implementar un plugin diferente de select...
+    .bootstrap-select .dropdown-menu.show .inner {
+        display: inline !important;
+    }
+
+
+
+
     padding-top: 20px;
-    label{
+
+    label {
         font-weight: bold;
         margin-top: 5px;
         text-transform: uppercase;
@@ -8,27 +18,29 @@
         text-align: left;
     }
 
-    .list-group-item, .card-header, .card-footer{
+    .list-group-item,
+    .card-header,
+    .card-footer {
         padding-top: 20px;
         padding-bottom: 20px;
     }
 
-    .btn_detect{
+    .btn_detect {
         transition: all 0.2s ease-in-out;
         overflow: hidden;
         height: 34px;
 
-        &:not(.detecting){
+        &:not(.detecting) {
             width: 85px;
         }
-        
 
-        &.detecting{
+
+        &.detecting {
             width: 160px;
         }
     }
 
-    .clickFocus{
+    .clickFocus {
         width: 20px;
         height: 20px;
         background-color: orange;
@@ -38,15 +50,15 @@
         left: -100px;
     }
 
-    #listHotKeys{
-        .list-group{
+    #listHotKeys {
+        .list-group {
             max-height: 415px;
             overflow: scroll;
             overflow-x: hidden;
 
-            .list-group-item{
+            .list-group-item {
                 font-size: 12px;
-            } 
+            }
         }
     }
 }

@@ -1,17 +1,18 @@
 import './style.scss';
 import {useState} from 'react';
 
-import {Quote}           from '../../components/utils/Quote';
-//import SideAd          from '../../components/utils/SideAd';
+import {Quote}            from '../../components/utils/Quote';
+//import SideAd           from '../../components/utils/SideAd';
 
-import Header           from '../../components/home/Header';
-import CarouselMessages from '../../components/home/CarouselMessages';
-import FAQ              from '../../components/home/FAQ';
-import Contact          from '../../components/home/Contact';
-import Footer           from '../../components/home/Footer';
-import Steps            from './Steps';
+import Header             from '../../components/home/Header';
+import CarouselMessages   from '../../components/home/CarouselMessages';
+import ListItemsGenerator from '../../components/home/ListItemsGenerator';
+import FAQ                from '../../components/home/FAQ';
+import Contact            from '../../components/home/Contact';
+import Footer             from '../../components/home/Footer';
+import Steps              from './Steps';
 
-import Generator        from '../../components/common/Generator';
+import Generator          from '../../components/common/Generator';
 
 export default function Home() {
 
@@ -73,6 +74,11 @@ export default function Home() {
       </div>
 
       {/* <Templates /> */}
+
+      <section className='container section pt-1'>
+        <ListItemsGenerator activators={listActivators} actions={listActions} />
+      </section>
+      
 
       <div className="section">
         <FAQ />

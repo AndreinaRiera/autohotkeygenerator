@@ -1,0 +1,14 @@
+{
+  "navbar": {
+    "generator" : "Create",
+    "contact"   : "Contacts",
+    "navbarText": {
+      "label": "One minute saved every hour, that's 146 hours a year",
+      "swal" : {
+        "title"            : "It's true, look!",
+        "confirmButtonText": "Oh, it's true. Thanks",
+        "html"             : "1 minute every hour * 24 hours a day = <strong> 24 minutes </strong> <br> * 365 days a year = <strong> 8,760 minutes </strong> <br> / 60 minutes every hour = <strong> 146 hours </strong>"
+      }
+    }
+  }
+}
