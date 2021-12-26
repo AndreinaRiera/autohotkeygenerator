@@ -19,6 +19,7 @@ export default function ListItemsGenerator({ activators, actions }) {
 
         if (list.hasOwnProperty('list')) {
             list['list'].forEach(item => {
+                var key = false;
                 var item_url = item.url ? (isValidURL(item.url) ? item.url : (documentationURL + item.url)) : "";
 
                 if (item.hasOwnProperty('key')) {
@@ -30,15 +31,15 @@ export default function ListItemsGenerator({ activators, actions }) {
                             listItems[listItemIndex]['url'] = item_url;
                         }
                     } else {
-                        listItems.push({
-                            key: item['key'],
-                            optionDescription: item.optionDescription,
-                            url: item_url
-                        });
+                        key = item['key'];
                     }
                 } else {
+                    key = item.result({});
+                }
+
+                if (key) {
                     listItems.push({
-                        key: item.result({}),
+                        key,
                         optionDescription: item.optionDescription,
                         url: item_url
                     });
@@ -51,7 +52,7 @@ export default function ListItemsGenerator({ activators, actions }) {
                 <tr className="table-secondary">
                     <th style={{ width: "70px" }}> {listItems.length} </th>
                     <th style={{ width: "20%" }}>{title}</th>
-                    <th>Usos</th>
+                    <th> {t("listItems.uses")} </th>
                 </tr>
             </thead>
             <tbody>
@@ -69,9 +70,8 @@ export default function ListItemsGenerator({ activators, actions }) {
 
     return (
         <>
-            <RenderTableItems list={activators} title="Activadores" />
-
-            <RenderTableItems list={actions} title="Acciones" />
+            <RenderTableItems list={activators} title={t("activators")} />
+            <RenderTableItems list={actions} title={t("actions")} />
         </>
     )
 }

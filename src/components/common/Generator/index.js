@@ -1,5 +1,7 @@
 import "./style.scss";
 import React, { useState, useEffect } from "react";
+import { useTranslation } from 'react-i18next';
+
 import Select from "../../utils/Select";
 
 import { Scroll } from "../../utils/Scroll";
@@ -12,11 +14,13 @@ import InputKeyPress from "./InputKeyPress";
 
 export default function Generator({ listActivators, listActions, setListActivators, setListActions }) {
 
+	const { t } = useTranslation();
+
 	const [stateModal, setStateModal] = useState(false);
 
 	const [stateDetectionCursor, setstateDetectionCursor] = useState(false);
-	const [stateCursorPos, setStateCursorPos] = useState([[0, 0], [0, 0]]);
-	const [stateclickFocus, setstateClickFocus] = useState(false);
+	const [stateCursorPos, setStateCursorPos]             = useState([[0, 0], [0, 0]]);
+	const [stateclickFocus, setstateClickFocus]           = useState(false);
 
 	function trackCursor() {
 		setTimeout(() => {
@@ -51,24 +55,24 @@ export default function Generator({ listActivators, listActions, setListActivato
 		},
 		list: [
 			{
-				placeholder: "esto",
+				placeholder: t("listActivators.text.placeholder"),
 				description: <>El evento se activara cuando escribas la palabra o frase y luego un <Scroll to="#ending_characters" accordion>caracter final</Scroll>, como punto o coma</>,
 				selectValue: "text",
-				optionDescription: "Al escribir",
+				optionDescription: t("listActivators.text.optionDescription"),
 				defaultValue: true,
-				url: 'Hotstrings.htm',
+				url: '/Hotstrings.htm',
 				result: ({ activator }) => {
-					var activatorText = activator ? activator.text : "texto";
+					var activatorText = activator ? activator.text : t("listActivators.text.defaultValueResult");
 					return `::${activatorText}::`;
 				}
 			}, {
 				placeholder: "Ctrl + d",
 				description: <>Haz click en el area para escribir y presiona simultaneamente las teclas que quieres utilizar como hotkey</>,
 				selectValue: "press",
-				optionDescription: "Al presionar estas teclas",
-				url: 'Hotkeys.htm',
+				optionDescription: t("listActivators.press.optionDescription"),
+				url: '/Hotkeys.htm',
 				result: ({ activator }) => {
-					var activatorKeys = activator ? activator.keys.value : ['Ctrl', 'B'];
+					var activatorKeys = activator ? activator.keys.value : ['Ctrl', 'd'];
 
 					if (activatorKeys.length) {
 						var specialKeys = {
@@ -120,7 +124,7 @@ export default function Generator({ listActivators, listActions, setListActivato
 
 	var listActionsObj = {
 		defaultValues: {
-			placeholder : "esto",
+			placeholder : t("listActions.defaultValues.placeholder"),
 			type        : "text",
 			defaultValue: false,
 			optgroup    : 0,
@@ -129,30 +133,30 @@ export default function Generator({ listActivators, listActions, setListActivato
 		},
 		list: [
 			{
-				description      : <>Cambia el texto activador por otro texto. ¡Podrias crear un acortador para escribir tu correo electronico!</>,
+				description      : <> {t("listActions.change.description")}</>,
 				selectValue      : "change",
-				optionDescription: "Suplantar por",
+				optionDescription: t("listActions.change.optionDescription"),
 				defaultValue     : true,
 				optgroup         : 1,
 				key              : "SendRaw",
-				url: 'commands/Send.htm',
+				url: '/commands/Send.htm',
 				result: ({ action }, defaultVale) => {
 					return "SendRaw" + includeActionText(action ? action.text : defaultVale, false);
 				}
 			}, {
-				description      : <>El texto que elijas se escribira automaticamente</>,
+				description      : <>{t("listActions.write.description")}</>,
 				selectValue      : "write",
-				optionDescription: "Escribir",
+				optionDescription: t("listActions.write.optionDescription"),
 				optgroup         : 1,
 				key              : "SendRaw",
 				result: ({ action }, defaultVale) => {
 					return "SendRaw" + includeActionText(action ? action.text : defaultVale, false);
 				}
 			}, {
-				placeholder      : "¡Hola! soy una ventana emergente",
-				description      : <>Se abrira una pequeña ventana emergente informativa, con el texto que elijas</>,
+				placeholder      : t("listActions.MsgBox.placeholder"),
+				description      : <>{t("listActions.MsgBox.description")}</>,
 				selectValue      : "MsgBox",
-				optionDescription: "Mostrar en ventana emergente",
+				optionDescription: t("listActions.MsgBox.optionDescription"),
 				optgroup         : 1,
 				key              : "MsgBox",
 				url: "commands/MsgBox.htm",
@@ -164,7 +168,7 @@ export default function Generator({ listActivators, listActions, setListActivato
 				placeholder      : "https://www.autohotkey.com",
 				description      : <>La URL que escribas se abrira en tu navegador predeterminado en una nueva pestaña</>,
 				selectValue      : "webpage",
-				optionDescription: "Abrir pagina web",
+				optionDescription: t("listActions.webpage.optionDescription"),
 				optgroup         : 2,
 				key              : "Run",
 				url: "commands/Run.htm",
@@ -173,9 +177,9 @@ export default function Generator({ listActivators, listActions, setListActivato
 				}
 			}, {
 				placeholder      : "\"D:\\Sublime Text 3\\sublime_text.exe\"",
-				description      : <>¿No sabes cual es la ruta y nombre exacto del programa? <Scroll to="#Know_which_is_the_path_and_name_of_programs" accordion>¡Lee las preguntas frecuentes y aprende como!</Scroll> </>,
+				description      : <>{t("listActions.program.description1")} <Scroll to="#Know_which_is_the_path_and_name_of_programs" accordion>{t("listActions.program.description2")}</Scroll> </>,
 				selectValue      : "program",
-				optionDescription: "Abrir programa",
+				optionDescription: t("listActions.program.optionDescription"),
 				optgroup         : 2,
 				key              : "Run",
 				result: ({ action }, defaultVale) => {
@@ -184,7 +188,7 @@ export default function Generator({ listActivators, listActions, setListActivato
 			},{
 				description      : <> Se efectuare un click en la posicion en la que este el cursor en ese momento </>,
 				selectValue      : "click",
-				optionDescription: "Hacer click en la posicion actual",
+				optionDescription: t("listActions.click.optionDescription"),
 				optgroup         : 3,
 				key              : "Click",
 				required         : false,
@@ -194,9 +198,9 @@ export default function Generator({ listActivators, listActions, setListActivato
 					return "Click";
 				}
 			}, {
-				description      : <> Se efectuare un doble-click en la posicion en la que este el cursor en ese momento </>,
+				description      : <>{t("listActions.click_double.description")}</>,
 				selectValue      : "click_double",
-				optionDescription: "Hacer dobleclick en la posicion actual",
+				optionDescription: t("listActions.click_double.optionDescription"),
 				optgroup         : 3,
 				key              : "Click",
 				required         : false,
@@ -205,13 +209,13 @@ export default function Generator({ listActivators, listActions, setListActivato
 					return "Click, 2";
 				}
 			},
-			{ ...createCursorObj("cursor_0", "Mover el cursor a", "0") },
-			{ ...createCursorObj("cursor", "Mover el cursor y hacer click en") },
-			{ ...createCursorObj("cursor_right", "Mover el cursor y hacer click derecho en", "Right") },
-			{ ...createCursorObj("cursor_double", "Mover el cursor y hacer dobleclick en", 2) },
+			{ ...createCursorObj("cursor_0", t("listActions.cursor_0"), "0") },
+			{ ...createCursorObj("cursor", t("listActions.cursor")) },
+			{ ...createCursorObj("cursor_right", t("listActions.cursor_right"), "Right") },
+			{ ...createCursorObj("cursor_double", t("listActions.cursor_double"), 2) },
 
 		],
-		optgroups: ["-", "Texto", "Abrir", "Cursor"]
+		optgroups: ["-", t("listActions.optgroups.text"), t("listActions.optgroups.run"), t("listActions.optgroups.cursor")]
 	};
 
 	function includeActionText(actionText, changeStrValues = true, changeStrQuotes = false) {
@@ -236,7 +240,7 @@ export default function Generator({ listActivators, listActions, setListActivato
 	function createCursorObj(selectValue, optionDescription, includeResult = "") {
 		return {
 			placeholder      : "x 100 y 100",
-			description      : "Presiona el boton para comenzar la deteccion y luego mueve el cursor hasta el punto que quieras y haz click",
+			description      : t("listActions.createCursor.description"),
 			selectValue      : selectValue,
 			optionDescription: optionDescription,
 			optgroup         : 3,
@@ -277,7 +281,7 @@ export default function Generator({ listActivators, listActions, setListActivato
 
 
 
-	const [descriptionHotKey, setDescriptionHotKey] = useState("Suplantar esto por esto");
+	const [descriptionHotKey, setDescriptionHotKey] = useState(t("descriptionHotkeyGenerator"));
 
 	const _handleChangDescription = function (e, value = false) {
 		setDescriptionHotKey(e ? e.target.value : value);
@@ -366,7 +370,7 @@ export default function Generator({ listActivators, listActions, setListActivato
 		},
 		remove: function (id) {
 			swalDelete({
-				text: "¿Estas seguro de borrar este hotkey?",
+				text: t("generator.swalDeleteHotkeyQuestion"),
 				title: ""
 			}).then(confirm => {
 				if(confirm){
@@ -378,7 +382,14 @@ export default function Generator({ listActivators, listActions, setListActivato
 			
 		},
 		generateFile: function () {
-			var result = listHotKeys.map(hotKey => hotKey.result).join(LINE_BREAK + LINE_BREAK);
+			var result = `#NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
+			; #Warn  ; Enable warnings to assist with detecting common errors.
+			SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
+			SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.`;
+
+			result += LINE_BREAK + LINE_BREAK;
+
+			result += listHotKeys.map(hotKey => hotKey.result).join(LINE_BREAK + LINE_BREAK);
 			downloadFile(createFile(result), "myHotkeys.ahk");
 			console.log(result);
 		}
@@ -510,7 +521,7 @@ export default function Generator({ listActivators, listActions, setListActivato
 						<div className="card card-primary">
 							<div className="card-header">
 								<div className="row">
-									<label className="col-12 col-md-3 col-xl-2 pb-3 pb-md-0">Descripcion</label>
+									<label className="col-12 col-md-3 col-xl-2 pb-3 pb-md-0">{t("generator.descriptionHotkey")}</label>
 									<div className="col p-md-0">
 										<input
 											type="text"
@@ -521,14 +532,14 @@ export default function Generator({ listActivators, listActions, setListActivato
 										/>
 									</div>
 									<div className="col-auto">
-										<button type="submit" className="btn btn-secondary btn_submit">Crear hotkey</button>
+										<button type="submit" className="btn btn-secondary btn_submit">{t("generator.createHotkey")}</button>
 									</div>
 								</div>
 							</div>
 							<ul className="list-group list-group-flush">
 								<li className="list-group-item">
 									<div className="row">
-										<label className="col-12 col-md-3 col-xl-2 pb-3 pb-md-0">Activador</label>
+										<label className="col-12 col-md-3 col-xl-2 pb-3 pb-md-0">{t("activator")}</label>
 										<div className="col">
 											<div className="row">
 												<div className="col-12 col-md-4  p-md-0">
@@ -565,7 +576,7 @@ export default function Generator({ listActivators, listActions, setListActivato
 								</li>
 								<li className="list-group-item">
 									<div className="row">
-										<label className="col-12 col-md-3 col-xl-2 pb-3 pb-md-0">Accion</label>
+										<label className="col-12 col-md-3 col-xl-2 pb-3 pb-md-0">{t("action")}</label>
 										<div className="col">
 											<div className="row">
 												<div className={`col-12  pl-md-0 ${stateAction.hideInput ? "col-md" : "pr-md-0 col-md-4"}`}>
@@ -594,7 +605,7 @@ export default function Generator({ listActivators, listActions, setListActivato
 													>{stateAction.value || ""}</textarea> */}
 												</div>
 												<div className={`col-auto pl-0 ${stateAction.buttonClick ? "" : "d-none"}`}>
-													<button type="button" className={`btn ${stateDetectionCursor ? "btn-success detecting" : "btn-secondary"}  btn_detect`} onClick={trackCursor} >{stateDetectionCursor ? "Esperando click" : "Detectar"}</button>
+													<button type="button" className={`btn ${stateDetectionCursor ? "btn-success detecting" : "btn-secondary"}  btn_detect`} onClick={trackCursor} >{stateDetectionCursor ? t("generator.waitingClick") : t("generator.detectClick")}</button>
 													<div className={`clickFocus animated animation-fast ${stateclickFocus ? "show scale-in-center" : "hide scale-out-center"}`} style={{ top: (stateCursorPos[1][1] - 10), left: (stateCursorPos[1][0] - 10) }}></div>
 												</div>
 											</div>
@@ -622,7 +633,7 @@ export default function Generator({ listActivators, listActions, setListActivato
 									{listHotKeys.length} atajos creados
 								</label>
 								<div className="col-12 text-center col-lg-auto">
-									<button type="button" className="btn btn-secondary" onClick={setListHotKeys.generateFile}>Generar ahk</button>
+									<button type="button" className="btn btn-secondary" onClick={setListHotKeys.generateFile}> { t("generator.generateAHK") } </button>
 								</div>
 							</div>
 						</div>
@@ -643,7 +654,7 @@ export default function Generator({ listActivators, listActions, setListActivato
 													<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 														<a class="dropdown-item" onClick={() => { setListHotKeys.remove(index); }} >
 															<i className="fas fa-trash mr-2"></i>
-															Borrar
+															{t("generator.deleteHotkey")}
 														</a>
 													</div>
 												</div>
@@ -654,7 +665,7 @@ export default function Generator({ listActivators, listActions, setListActivato
 							}
 
 							{
-								listHotKeys.length ? "" : <li className="list-group-item text-center text-muted">Aun no has agregado hotkeys, ¿Quieres ideas? Mira la <Scroll to="#ideas" className="scroll" accordion>seccion de preguntas frecuentes</Scroll></li>
+								listHotKeys.length ? "" : <li className="list-group-item text-center text-muted">{t("generator.withoutHotkeys1")} <Scroll to="#ideas" className="scroll" accordion>{t("generator.withoutHotkeys2")}</Scroll></li>
 							}
 						</ul>
 					</div>

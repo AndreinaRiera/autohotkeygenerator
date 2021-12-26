@@ -1,6 +1,14 @@
 import './style.scss';
+import { useTranslation } from 'react-i18next';
+import { getCurrentLocale, autohotkey } from "../../../i18n/list";
 
 export default function Footer() {
+    const { t, i18n } = useTranslation();
+    const currentLocale = getCurrentLocale(i18n.language);
+
+    const documentationURL = autohotkey['documentation']['locales'].hasOwnProperty(currentLocale)
+        ? autohotkey['documentation']['locales'][currentLocale]
+        : autohotkey['documentation']['url'];
 
     return (
         <footer className="bg-success-dark" id="footer">
@@ -12,13 +20,13 @@ export default function Footer() {
                         </a>
                     </div>
                     <div className="col-12 col-sm-auto ">
-                        <a href="https://www.autohotkey.com/docs/AutoHotkey.htm" target="_blank" className="btn btn-outline-light">
-                            Documentacion oficial
+                        <a href={`${documentationURL}/AutoHotkey.htm`} target="_blank" className="btn btn-outline-light">
+                            {t("footer.documentation")}
                         </a>
                     </div>
 
                     <div className="col text-center text-sm-right color-success-light">
-                        Hecho con <i className="fas fa-heart"></i> por y para amantes de la productividad
+                        {t("footer.madeBy")}
                     </div>
                 </div>
             </div>

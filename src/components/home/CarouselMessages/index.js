@@ -1,34 +1,38 @@
 import './style.scss';
+import { useTranslation } from 'react-i18next';
+
 import { Scroll } from '../../utils/Scroll';
 
 export default function CarouselMessages() {
+    const { t } = useTranslation();
+
     return (
         <section className="bg-success-light">
             <div id="CarouselMessages" className="carousel carousel-text slide" data-ride="carousel">
                 <div className="carousel-inner">
                     <div className="carousel-item active">
                         <div className="carousel-caption">
-                           <p>¡Personaliza tu teclado para reconfigurarlo como mas te convenga!</p>
+                           <p>{t("CarouselMessages.keyboard")}</p>
                         </div>
                     </div>
                     <div className="carousel-item">
                         <div className="carousel-caption">
-                           <p>¿Quieres fantasticas ideas de atajos y acortadores? <Scroll to="#ideas" className="text-white" accordion>¡Tenemos muchas para ti, haz click aquí!</Scroll></p>
+                           <p>{t("CarouselMessages.ideas.1")} <Scroll to="#ideas" className="text-white" accordion>{t("CarouselMessages.ideas.2")}</Scroll></p>
                         </div>
                     </div>
                     <div className="carousel-item">
                         <div className="carousel-caption">
-                           <p>Agrega un hotkey para abrir esta pagina y tu archivo .ahk ¡Asi podras agregar mas atajos en el momento que necesites!</p>
+                           <p>{t("CarouselMessages.openPage")}</p>
                         </div>
                     </div>
                     <div className="carousel-item">
                         <div className="carousel-caption">
-                           <p>Crea acortadores para textos que usas frecuentemente, como tu correo o nombre completo</p>
+                           <p>{t("CarouselMessages.email")}</p>
                         </div>
                     </div>
                     <div className="carousel-item">
                         <div className="carousel-caption">
-                           <p>Asigna combinaciones de tecla para abrir tus programas frecuentes y paginas web</p>
+                           <p>{t("CarouselMessages.program")}</p>
                         </div>
                     </div>
                 </div>

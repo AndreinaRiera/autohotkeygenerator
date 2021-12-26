@@ -122,12 +122,12 @@ export function getListCurrentLocales() {
 
 export const autohotkey = {
     documentation: {
-        url: "https://www.autohotkey.com/docs/",
+        url: "https://www.autohotkey.com/docs",
         locales: {
-            de: "https://ahkde.github.io/docs/",
-            ko: "https://ahkscript.github.io/ko/docs/",
-            pt: "https://ahkscript.github.io/pt/docs/",
-            zh: "https://wyagd001.github.io/zh-cn/docs/"
+            de: "https://ahkde.github.io/docs",
+            ko: "https://ahkscript.github.io/ko/docs",
+            pt: "https://ahkscript.github.io/pt/docs",
+            zh: "https://wyagd001.github.io/zh-cn/docs"
         }
     }
 }

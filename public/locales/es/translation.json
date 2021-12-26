@@ -1,4 +1,20 @@
 {
+  "activators"    : "Activadores",
+  "activator"     : "Activador",
+  "actions"       : "Acciones",
+  "action"        : "Accion",
+  "finalCharacter": "caracter final",
+
+  "home": {
+    "AutoHotkey"          : "AutoHotkey is a free, open-source scripting language for Windows that allows users to easily create small to complex scripts for all kinds of tasks such as: form fillers, auto-clicking, macros, etc.",
+    "stepDownload"        : "Si aun no lo has hecho, <strong>descarga autohotkey</strong> desde su pagina oficial. Y sigue los pasos hasta instalarlo correctamente. ",
+    "download"            : "Ir a la pagina oficial",
+    "stepCreate"          : "<strong>¡Ahora es momento de crear tus atajos!</strong> Utiliza el generador de abajo para agregar la descripcion de tu atajo, luego el activador que desencadenara la accion, y por ultimo lo que quieres que ocurra. Al terminar, presiona el boton para crear el hotkey. Puedes agregar tantos hotkeys como quieras. Al terminar presiona el boton para generar y descargar tu archivo AHK",
+    "altImgFile"          : "Imagen de archivo llamado myHotkeys.ahk",
+    "stepEunAutomatically": "Para ejecutar tus hotkeys solo tienes que hacer dobleclick sobre el archivo que creaste. ¡Pero hacer eso cada vez que inicies la computadora seria improductivo! Por eso, <strong> vamos a configurarlo para que se inicie automaticamente. </strong> <br /><br /> Lo primero que debes hacer es crear un acceso directo al archivo ahk que creaste antes, con todos tus atajos. Para esto haz click derecho sobre el archivo y presiona \"crear acceso directo\". <br /><br /> Para windows 11 o windows 10, pulsa la tecla Windows junto con la tecla de la letra R  (<kbd>⌘</kbd> + <kbd>R</kbd>). Se abrira la ventana de \"ejecutar\" donde debes escribir \"shell:startup\" (sin las comillas). Eso a su vez abrira una ventana del administrador de archivos, donde debes colocar el acceso directo a tu archivo de hotkeys. Corta el acceso directo que creaste antes, y pegalo en la carpeta que se abrio.",
+    "stepReady"           : "<strong> ¡Ya estan listos tus atajos!</strong> ¡Y puedes tener tantos atajos y hotkeys en funcionamiento como quieras ¡Nunca son demasiados! <br /> Recuerda que <strong>si descargas un nuevo archivo</strong> de hotkeys para actualizarlos, <strong>debes repetir el paso 6 nuevamente.</strong> Para asegurarte que esos hotkeys tambien se ejecutaran automaticamente cada vez que inicies la computadora."
+  },
+
   "navbar": {
     "generator" : "Crear",
     "contact"   : "Contactos",
@@ -10,5 +26,145 @@
         "html"             : "1 minuto cada hora * 24 horas al dia = <strong>24 minutos</strong> <br> * 365 dias del año = <strong>8.760 minutos</strong> <br> / 60 minutos cada hora = <strong>146 horas</strong>"
       }
     }
+  },
+
+  "header": {
+    "description": "<p>Crea hotkeys</p><p>Mejora tu productividad</p><p>Optimiza tu vida</p>",
+    "popoverImg" : {
+      "title"  : "Este vector es cortesia de ",
+      "freepik": "freepik.es",
+      "content": "Freepik es una biblioteca de imagenes, vectores y videos libres de copyright <br /><br /> ¡Con mucho contenido gratis para todos tus proyectos!"
+    }
+  },
+
+  "CarouselMessages": {
+    "keyboard": "¡Personaliza tu teclado para reconfigurarlo como mas te convenga!",
+    "ideas"   : {
+      "1": "¿Quieres fantasticas ideas de atajos y acortadores?",
+      "2": "¡Tenemos muchas para ti, haz click aquí!"
+    },
+    "openPage": "Agrega un hotkey para abrir esta pagina y tu archivo .ahk ¡Asi podras agregar mas atajos en el momento que necesites!",
+    "email"   : "Crea acortadores para textos que usas frecuentemente, como tu correo o nombre completo",
+    "program" : "Asigna combinaciones de tecla para abrir tus programas frecuentes y paginas web"
+  },
+
+  "listActivators": {
+    "text": {
+      "placeholder"       : "esto",
+      "description1"      : "El evento se activara cuando escribas la palabra o frase y luego un ",
+      "description2"      : ", como punto o coma",
+      "optionDescription" : "Al escribir",
+      "defaultValueResult": "texto"
+    },
+    "press": {
+      "description"      : "Haz click en el area para escribir y presiona simultaneamente las teclas que quieres utilizar como hotkey",
+      "optionDescription": "Al presionar estas teclas"
+    }
+  },
+
+  "listActions": {
+    "defaultValues": {
+      "placeholder": "esto"
+    },
+    "change": {
+      "description"      : "Cambia el texto activador por otro texto. ¡Podrias crear un acortador para escribir tu correo electronico!",
+      "optionDescription": "Suplantar por"
+    },
+    "write": {
+      "description"      : "El texto que elijas se escribira automaticamente",
+      "optionDescription": "Escribir"
+    },
+    "MsgBox": {
+      "placeholder"      : "¡Hola! soy una ventana emergente",
+      "description"      : "Se abrira una pequeña ventana emergente informativa, con el texto que elijas",
+      "optionDescription": "Mostrar en ventana emergente"
+    },
+    "webpage": {
+      "description"      : "La URL que escribas se abrira en tu navegador predeterminado en una nueva pestaña",
+      "optionDescription": "Abrir pagina web"
+    },
+    "program": {
+      "description1"     : "¿No sabes cual es la ruta y nombre exacto del programa?",
+      "description2"     : "¡Lee las preguntas frecuentes y aprende como!",
+      "optionDescription": "Abrir programa"
+    },
+    "click": {
+      "description"      : "Se efectuare un click en la posicion en la que este el cursor en ese momento",
+      "optionDescription": "Hacer click en la posicion actual"
+    },
+    "click_double": {
+      "description"      : "Se efectuare un doble-click en la posicion en la que este el cursor en ese momento",
+      "optionDescription": "Hacer dobleclick en la posicion actual"
+    },
+    "cursor_0"     : "Mover el cursor a",
+    "cursor"       : "Mover el cursor y hacer click en",
+    "cursor_right" : "Mover el cursor y hacer click derecho en",
+    "cursor_double": "Mover el cursor y hacer dobleclick en",
+    "optgroups"    : {
+      "text"  : "Texto",
+      "run"   : "Abrir",
+      "cursor": "Cursor"
+    },
+    "createCursor": {
+      "description": "Presiona el boton para comenzar la deteccion y luego mueve el cursor hasta el punto que quieras y haz click"
+    }
+  },
+
+  "descriptionHotkeyGenerator": "Suplantar esto por esto",
+
+  "generator": {
+    "swalDeleteHotkeyQuestion": "¿Estas seguro de borrar este hotkey?",
+    "descriptionHotkey"       : "Descripcion",
+    "createHotkey"            : "Crear hotkey",
+    "waitingClick"            : "Esperando click",
+    "detectClick"             : "Detectar",
+    "hotkeysCreated"          : "atajos creados",
+    "generateAHK"             : "Generar ahk",
+    "deleteHotkey"            : "Borrar",
+    "withoutHotkeys1"         : "Aun no has agregado hotkeys, ¿Quieres ideas? Mira la ",
+    "withoutHotkeys2"         : "seccion de preguntas frecuentes"
+  },
+
+  "listItems": {
+    "uses": "Usos"
+  },
+
+  "FAQ": {
+    "path_and_name_of_programs": {
+      "title": "¿Como saber la ruta y nombre de un programa? ",
+      "list" : {
+        "1": "Haz click en el <strong>icono de window</strong> y dentro de la barra de busqueda escribe el <strong>nombre del programa</strong>",
+        "2": "Luego haga click derecho sobre el programa y seleccion <strong>\"Abrir ubicacion del archivo\"</strong>",
+        "3": "Se te abrira una ventana del explorador de archivo, con el acceso directo al programa seleccionado. Haga <strong>click derecho</strong> sobre el y seleccion la opcion <strong>\"Propiedades\"</strong>",
+        "4": "En la pestaña <strong>\"Acceso directo\"</strong> copie el contenido dentro de la opcion <strong>\"Destino\"</strong>. Eso contiene la ruta y nombre del programa. "
+      }
+    },
+    "ending_characters": {
+      "title": "¿Que son los caracteres finales y cuales son? ",
+      "cite" : "AutoHotKey official doc",
+      "quote": {
+        "1": "A menos que la ",
+        "2": " opción de asterisco",
+        "3": " esté en vigor, debe escribir un carácter final después de la abreviatura de una cadena activa para activarla. Los caracteres finales inicialmente consisten en lo siguiente:"
+      }
+    },
+    "asterisk_option": {
+      "title"    : "¿Que es la opcion de asterisco? ",
+      "text"     : "La opcion de asterisco permite que no se necesite un caracter final para activar una abreviatura. Siempre que se detecte la palabra o frase se activara la accion elegida.",
+      "yourEmail": "tuEmail"
+    },
+    "ideas": {
+      "title": "¿Quieres ideas sobre atajos? "
+    }
+  },
+
+  "contact": {
+    "title"     : "¿No encuentras el activador o la accion que necesitas?  ¡Avisanos y lo agregamos! ",
+    "btnContact": "Contactar"
+  },
+
+  "footer": {
+    "documentation": "Documentacion oficial",
+    "madeBy"       : "Hecho con <i className=\"fas fa-heart\"></i> por y para amantes de la productividad"
   }
 }
