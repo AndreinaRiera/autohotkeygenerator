@@ -15,14 +15,13 @@ export default function Header() {
 			<div className="container-fluid">
 				<div className="row">
 					<section className="col p-4">
-						<div className="description">
-							{t("header.description")}
+						<div className="description"  dangerouslySetInnerHTML={{__html: t('header.description')}}>
 						</div>
 					</section>
 					<div className="col-sm-4 text-center p-4 image">
 						<PopoverBootstrap
 							title={<>{t("header.popoverImg.title")} <a target="_blank" rel="noopener noreferrer" href='https://www.freepik.es/search?query=teletrabajo&selection=1'>{t("header.popoverImg.freepik")}</a></>}
-							content={<>{t("header.popoverImg.content")}</>}
+							content={<><span dangerouslySetInnerHTML={{__html: t('header.popoverImg.content')}} /></>}
 						>
 							<img src="/images/header.png" with="100%" alt="Imagen sobre automatizacion" />
 						</PopoverBootstrap>

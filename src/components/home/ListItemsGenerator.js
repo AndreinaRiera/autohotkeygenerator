@@ -14,18 +14,19 @@ export default function ListItemsGenerator({ activators, actions }) {
         ? autohotkey['documentation']['locales'][currentLocale]
         : autohotkey['documentation']['url'];
 
-    const RenderTableItems = ({ list, title }) => {
+    const RenderTableItems = ({ list, title, nameList }) => {
         var listItems = [];
 
         if (list.hasOwnProperty('list')) {
             list['list'].forEach(item => {
                 var key = false;
+                var optionDescription = t(nameList+"."+item['selectValue']+".optionDescription");
                 var item_url = item.url ? (isValidURL(item.url) ? item.url : (documentationURL + item.url)) : "";
 
                 if (item.hasOwnProperty('key')) {
                     var listItemIndex = listItems.findIndex(e => e.key === item['key']);
                     if (listItemIndex >= 0) {
-                        listItems[listItemIndex]['optionDescription'] += " - " + item.optionDescription;
+                        listItems[listItemIndex]['optionDescription'] += " - " + optionDescription;
 
                         if (item_url) {
                             listItems[listItemIndex]['url'] = item_url;
@@ -33,14 +34,15 @@ export default function ListItemsGenerator({ activators, actions }) {
                     } else {
                         key = item['key'];
                     }
-                } else {
-                    key = item.result({});
+                } else { 
+                    var defaultValue = nameList+"."+item['selectValue']+".defaultValueResult";
+                    key = item.result({}, i18n.exists(defaultValue) ? t(defaultValue) : null);
                 }
 
                 if (key) {
                     listItems.push({
                         key,
-                        optionDescription: item.optionDescription,
+                        optionDescription: optionDescription,
                         url: item_url
                     });
                 }
@@ -70,8 +72,8 @@ export default function ListItemsGenerator({ activators, actions }) {
 
     return (
         <>
-            <RenderTableItems list={activators} title={t("activators")} />
-            <RenderTableItems list={actions} title={t("actions")} />
+            <RenderTableItems list={activators} nameList="listActivators" title={t("activators")} />
+            <RenderTableItems list={actions} nameList="listActions" title={t("actions")} />
         </>
     )
 }

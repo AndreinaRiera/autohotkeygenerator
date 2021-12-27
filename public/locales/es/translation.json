@@ -7,12 +7,12 @@
 
   "home": {
     "AutoHotkey"          : "AutoHotkey is a free, open-source scripting language for Windows that allows users to easily create small to complex scripts for all kinds of tasks such as: form fillers, auto-clicking, macros, etc.",
-    "stepDownload"        : "Si aun no lo has hecho, <strong>descarga autohotkey</strong> desde su pagina oficial. Y sigue los pasos hasta instalarlo correctamente. ",
+    "stepDownload"        : "Si aun no lo has hecho, <bold>descarga autohotkey</bold> desde su pagina oficial. Y sigue los pasos hasta instalarlo correctamente. ",
     "download"            : "Ir a la pagina oficial",
     "stepCreate"          : "<strong>¡Ahora es momento de crear tus atajos!</strong> Utiliza el generador de abajo para agregar la descripcion de tu atajo, luego el activador que desencadenara la accion, y por ultimo lo que quieres que ocurra. Al terminar, presiona el boton para crear el hotkey. Puedes agregar tantos hotkeys como quieras. Al terminar presiona el boton para generar y descargar tu archivo AHK",
     "altImgFile"          : "Imagen de archivo llamado myHotkeys.ahk",
-    "stepEunAutomatically": "Para ejecutar tus hotkeys solo tienes que hacer dobleclick sobre el archivo que creaste. ¡Pero hacer eso cada vez que inicies la computadora seria improductivo! Por eso, <strong> vamos a configurarlo para que se inicie automaticamente. </strong> <br /><br /> Lo primero que debes hacer es crear un acceso directo al archivo ahk que creaste antes, con todos tus atajos. Para esto haz click derecho sobre el archivo y presiona \"crear acceso directo\". <br /><br /> Para windows 11 o windows 10, pulsa la tecla Windows junto con la tecla de la letra R  (<kbd>⌘</kbd> + <kbd>R</kbd>). Se abrira la ventana de \"ejecutar\" donde debes escribir \"shell:startup\" (sin las comillas). Eso a su vez abrira una ventana del administrador de archivos, donde debes colocar el acceso directo a tu archivo de hotkeys. Corta el acceso directo que creaste antes, y pegalo en la carpeta que se abrio.",
-    "stepReady"           : "<strong> ¡Ya estan listos tus atajos!</strong> ¡Y puedes tener tantos atajos y hotkeys en funcionamiento como quieras ¡Nunca son demasiados! <br /> Recuerda que <strong>si descargas un nuevo archivo</strong> de hotkeys para actualizarlos, <strong>debes repetir el paso 6 nuevamente.</strong> Para asegurarte que esos hotkeys tambien se ejecutaran automaticamente cada vez que inicies la computadora."
+    "stepRunAutomatically": "Para ejecutar tus hotkeys solo tienes que hacer dobleclick sobre el archivo que creaste. ¡Pero hacer eso cada vez que inicies la computadora seria improductivo! Por eso, <strong> vamos a configurarlo para que se inicie automaticamente. </strong> <br /><br /> Lo primero que debes hacer es crear un acceso directo al archivo ahk que creaste antes, con todos tus atajos. Para esto haz click derecho sobre el archivo y presiona \"crear acceso directo\". <br /><br /> Para windows 11 o windows 10, pulsa la tecla Windows junto con la tecla de la letra R  (<kbd>⌘</kbd> + <kbd>R</kbd>). Se abrira la ventana de \"ejecutar\" donde debes escribir \"shell:startup\" (sin las comillas). Eso a su vez abrira una ventana del administrador de archivos, donde debes colocar el acceso directo a tu archivo de hotkeys. Corta el acceso directo que creaste antes, y pegalo en la carpeta que se abrio.",
+    "stepReady"           : "<strong> ¡Ya estan listos tus atajos!</strong> ¡Y puedes tener tantos atajos y hotkeys en funcionamiento como quieras ¡Nunca son demasiados! <br /> Recuerda que <strong>si descargas un nuevo archivo</strong> de hotkeys para actualizarlos, <strong>debes repetir el paso 3 nuevamente</strong>, o bien, colocar el nuevo archivo en la misma ruta y con el mismo nombre. Para asegurarte que esos hotkeys tambien se ejecutaran automaticamente cada vez que inicies la computadora."
   },
 
   "navbar": {
@@ -49,10 +49,12 @@
   },
 
   "listActivators": {
+    "defaultValues": {
+      "placeholder": "esto"
+    },
     "text": {
+      "description"       : "El evento se activara cuando escribas la palabra o frase y luego un caracter final, como punto o coma",
       "placeholder"       : "esto",
-      "description1"      : "El evento se activara cuando escribas la palabra o frase y luego un ",
-      "description2"      : ", como punto o coma",
       "optionDescription" : "Al escribir",
       "defaultValueResult": "texto"
     },
@@ -96,17 +98,26 @@
       "description"      : "Se efectuare un doble-click en la posicion en la que este el cursor en ese momento",
       "optionDescription": "Hacer dobleclick en la posicion actual"
     },
-    "cursor_0"     : "Mover el cursor a",
-    "cursor"       : "Mover el cursor y hacer click en",
-    "cursor_right" : "Mover el cursor y hacer click derecho en",
-    "cursor_double": "Mover el cursor y hacer dobleclick en",
+    "cursor_0": { 
+      "optionDescription": "Mover el cursor a",
+      "description"      : "Presiona el boton para comenzar la deteccion y luego mueve el cursor hasta el punto que quieras y haz click"
+    },
+    "cursor": { 
+      "optionDescription": "Mover el cursor y hacer click en",
+      "description"      : "Presiona el boton para comenzar la deteccion y luego mueve el cursor hasta el punto que quieras y haz click"
+    },
+    "cursor_right": { 
+      "optionDescription": "Mover el cursor y hacer click derecho en",
+      "description"      : "Presiona el boton para comenzar la deteccion y luego mueve el cursor hasta el punto que quieras y haz click"
+    },
+    "cursor_double": { 
+      "optionDescription": "Mover el cursor y hacer dobleclick en",
+      "description"      : "Presiona el boton para comenzar la deteccion y luego mueve el cursor hasta el punto que quieras y haz click"
+    },
     "optgroups"    : {
       "text"  : "Texto",
       "run"   : "Abrir",
       "cursor": "Cursor"
-    },
-    "createCursor": {
-      "description": "Presiona el boton para comenzar la deteccion y luego mueve el cursor hasta el punto que quieras y haz click"
     }
   },
 
@@ -165,6 +176,7 @@
 
   "footer": {
     "documentation": "Documentacion oficial",
-    "madeBy"       : "Hecho con <i className=\"fas fa-heart\"></i> por y para amantes de la productividad"
+    "made"         : "Hecho con",
+    "by"           : "por y para amantes de la productividad"
   }
 }

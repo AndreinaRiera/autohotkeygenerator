@@ -15,6 +15,16 @@ export default function FAQ() {
         ? autohotkey['documentation']['locales'][currentLocale]
         : autohotkey['documentation']['url'];
 
+
+    const RenderLis = () => {
+        var li = [];
+        for (var i = 1; i < 5; i++) {
+            li.push(<li dangerouslySetInnerHTML={{__html: t("FAQ.path_and_name_of_programs.list."+i)}} ></li>);
+        } 
+
+        return li;
+    };
+
     return (
         <section className="" id="FAQ">
             <div className="container py-5">
@@ -25,10 +35,7 @@ export default function FAQ() {
                                 <div className="row">
                                     <div className="col pt-md-4">
                                         <NumericList>
-                                            <li> {t("FAQ.path_and_name_of_programs.list.1")} </li>
-                                            <li> {t("FAQ.path_and_name_of_programs.list.2")} </li>
-                                            <li> {t("FAQ.path_and_name_of_programs.list.3")} </li>
-                                            <li> {t("FAQ.path_and_name_of_programs.list.4")} </li>
+                                            <RenderLis />
                                         </NumericList>
                                     </div>
                                     <div  className="col-5 d-none d-md-block">

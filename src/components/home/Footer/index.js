@@ -26,7 +26,9 @@ export default function Footer() {
                     </div>
 
                     <div className="col text-center text-sm-right color-success-light">
-                        {t("footer.madeBy")}
+                        {t("footer.made")} 
+                        <i className="fas fa-heart mx-2"></i> 
+                        {t("footer.by")}
                     </div>
                 </div>
             </div>

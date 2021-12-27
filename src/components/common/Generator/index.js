@@ -1,6 +1,10 @@
 import "./style.scss";
 import React, { useState, useEffect } from "react";
+
 import { useTranslation } from 'react-i18next';
+import { getCurrentLocale } from "../../../i18n/list";
+import {listActivatorsObj} from './listActivatorsObj';
+import {listActionsObj} from './listActionsObj';
 
 import Select from "../../utils/Select";
 
@@ -14,7 +18,7 @@ import InputKeyPress from "./InputKeyPress";
 
 export default function Generator({ listActivators, listActions, setListActivators, setListActions }) {
 
-	const { t } = useTranslation();
+	const { t, i18n } = useTranslation();
 
 	const [stateModal, setStateModal] = useState(false);
 
@@ -43,215 +47,7 @@ export default function Generator({ listActivators, listActions, setListActivato
 		}, 200);
 		setstateDetectionCursor(true);
 	}
-
-	var listActivatorsObj = {
-		defaultValues: {
-			placeholder : "esto",
-			type        : "text",
-			defaultValue: false,
-			optgroup    : 0,
-			readOnly    : false,
-			selectValue: "text"
-		},
-		list: [
-			{
-				placeholder: t("listActivators.text.placeholder"),
-				description: <>El evento se activara cuando escribas la palabra o frase y luego un <Scroll to="#ending_characters" accordion>caracter final</Scroll>, como punto o coma</>,
-				selectValue: "text",
-				optionDescription: t("listActivators.text.optionDescription"),
-				defaultValue: true,
-				url: '/Hotstrings.htm',
-				result: ({ activator }) => {
-					var activatorText = activator ? activator.text : t("listActivators.text.defaultValueResult");
-					return `::${activatorText}::`;
-				}
-			}, {
-				placeholder: "Ctrl + d",
-				description: <>Haz click en el area para escribir y presiona simultaneamente las teclas que quieres utilizar como hotkey</>,
-				selectValue: "press",
-				optionDescription: t("listActivators.press.optionDescription"),
-				url: '/Hotkeys.htm',
-				result: ({ activator }) => {
-					var activatorKeys = activator ? activator.keys.value : ['Ctrl', 'd'];
-
-					if (activatorKeys.length) {
-						var specialKeys = {
-							Win: "#",
-							Ctrl: "^",
-							Alt: "!",
-							Shift: "+"
-						};
-
-						var remplaceKeys = {
-							AltGr: "<^>!",
-							Escape: "Esc",
-							"!": "{!}",
-							"#": "{#}",
-							"^": "{^}",
-							"+": "{+}"
-						};
-
-						var activatorKeys_new = [];
-						var hasSpecialKeys = false;
-
-						activatorKeys.forEach(element => {
-							var keyPush;
-
-							if (Object.prototype.hasOwnProperty.call(specialKeys, element)) {
-								keyPush = specialKeys[element];
-								hasSpecialKeys = true;
-							} else if (Object.prototype.hasOwnProperty.call(remplaceKeys, element)) {
-								keyPush = remplaceKeys[element];
-							} else {
-								keyPush = element;
-							}
-
-							activatorKeys_new.push(keyPush);
-						});
-
-						var activatorKeys_text = hasSpecialKeys ? activatorKeys_new.join("") : activatorKeys_new.join(" & ");
-
-						return `${activatorKeys_text}::`;
-					} else {
-						// Alert for invalid
-						return false;
-					}
-				}
-			}
-		]
-	};
-
-
-	var listActionsObj = {
-		defaultValues: {
-			placeholder : t("listActions.defaultValues.placeholder"),
-			type        : "text",
-			defaultValue: false,
-			optgroup    : 0,
-			readOnly    : false,
-			required    : true
-		},
-		list: [
-			{
-				description      : <> {t("listActions.change.description")}</>,
-				selectValue      : "change",
-				optionDescription: t("listActions.change.optionDescription"),
-				defaultValue     : true,
-				optgroup         : 1,
-				key              : "SendRaw",
-				url: '/commands/Send.htm',
-				result: ({ action }, defaultVale) => {
-					return "SendRaw" + includeActionText(action ? action.text : defaultVale, false);
-				}
-			}, {
-				description      : <>{t("listActions.write.description")}</>,
-				selectValue      : "write",
-				optionDescription: t("listActions.write.optionDescription"),
-				optgroup         : 1,
-				key              : "SendRaw",
-				result: ({ action }, defaultVale) => {
-					return "SendRaw" + includeActionText(action ? action.text : defaultVale, false);
-				}
-			}, {
-				placeholder      : t("listActions.MsgBox.placeholder"),
-				description      : <>{t("listActions.MsgBox.description")}</>,
-				selectValue      : "MsgBox",
-				optionDescription: t("listActions.MsgBox.optionDescription"),
-				optgroup         : 1,
-				key              : "MsgBox",
-				url: "commands/MsgBox.htm",
-				result: ({ action }, defaultVale) => {
-					return "MsgBox" + includeActionText(action ? action.text : defaultVale);
-				}
-			}, {
-				type             : "url",
-				placeholder      : "https://www.autohotkey.com",
-				description      : <>La URL que escribas se abrira en tu navegador predeterminado en una nueva pestaña</>,
-				selectValue      : "webpage",
-				optionDescription: t("listActions.webpage.optionDescription"),
-				optgroup         : 2,
-				key              : "Run",
-				url: "commands/Run.htm",
-				result: ({ action }, defaultVale) => {
-					return "Run" + includeActionText(action ? action.text : defaultVale, false, true);
-				}
-			}, {
-				placeholder      : "\"D:\\Sublime Text 3\\sublime_text.exe\"",
-				description      : <>{t("listActions.program.description1")} <Scroll to="#Know_which_is_the_path_and_name_of_programs" accordion>{t("listActions.program.description2")}</Scroll> </>,
-				selectValue      : "program",
-				optionDescription: t("listActions.program.optionDescription"),
-				optgroup         : 2,
-				key              : "Run",
-				result: ({ action }, defaultVale) => {
-					return "Run" + includeActionText(action ? action.text : defaultVale, false, true);
-				}
-			},{
-				description      : <> Se efectuare un click en la posicion en la que este el cursor en ese momento </>,
-				selectValue      : "click",
-				optionDescription: t("listActions.click.optionDescription"),
-				optgroup         : 3,
-				key              : "Click",
-				required         : false,
-				hideInput        : true,
-				url: "commands/Click.htm",
-				result: () => {
-					return "Click";
-				}
-			}, {
-				description      : <>{t("listActions.click_double.description")}</>,
-				selectValue      : "click_double",
-				optionDescription: t("listActions.click_double.optionDescription"),
-				optgroup         : 3,
-				key              : "Click",
-				required         : false,
-				hideInput        : true,
-				result: () => {
-					return "Click, 2";
-				}
-			},
-			{ ...createCursorObj("cursor_0", t("listActions.cursor_0"), "0") },
-			{ ...createCursorObj("cursor", t("listActions.cursor")) },
-			{ ...createCursorObj("cursor_right", t("listActions.cursor_right"), "Right") },
-			{ ...createCursorObj("cursor_double", t("listActions.cursor_double"), 2) },
-
-		],
-		optgroups: ["-", t("listActions.optgroups.text"), t("listActions.optgroups.run"), t("listActions.optgroups.cursor")]
-	};
-
-	function includeActionText(actionText, changeStrValues = true, changeStrQuotes = false) {
-		// caracteres literales (para que no se confundan con teclas)
-		if(changeStrValues){
-			["#", "^", "!", "+", "<^>!", "Delete", "{", "}"].forEach(key => {
-				actionText = actionText.replaceAll(key, `{${key}}`);
-			});
-		} 
-		// saltos de linea
-		actionText = actionText.replace(/(?:\r\n|\r|\n)/g, ' `n ');
-		// tab
-		actionText = actionText.replace(/\t/g, ' `t ');
-
-		if(changeStrQuotes){
-			actionText = actionText.replaceAll("\"", "")
-		}
-
-		return `, ${actionText}`;
-	}
-
-	function createCursorObj(selectValue, optionDescription, includeResult = "") {
-		return {
-			placeholder      : "x 100 y 100",
-			description      : t("listActions.createCursor.description"),
-			selectValue      : selectValue,
-			optionDescription: optionDescription,
-			optgroup         : 3,
-			readOnly         : true,
-			buttonClick      : true,
-			key              : "Click",
-			result: (obj) => {
-				return "Click," + obj["cursor"] + includeResult;
-			}
-		};
-	}
+	
 
 	useEffect(() => {
 		setListActivators(listActivatorsObj);
@@ -281,7 +77,7 @@ export default function Generator({ listActivators, listActions, setListActivato
 
 
 
-	const [descriptionHotKey, setDescriptionHotKey] = useState(t("descriptionHotkeyGenerator"));
+	const [descriptionHotKey, setDescriptionHotKey] = useState("");
 
 	const _handleChangDescription = function (e, value = false) {
 		setDescriptionHotKey(e ? e.target.value : value);
@@ -446,9 +242,28 @@ export default function Generator({ listActivators, listActions, setListActivato
 
 
 
-	const listInfoToOptions = (list) => {
+	const listInfoToOptions = (list, typeList, defaultValue = "") => {
 		var options = [];
 		var list_has_options = (list.hasOwnProperty('list') && list['list'].length) ? true : false;
+
+		const createLabel = selectValue => t(typeList + "." + selectValue + ".optionDescription");
+
+
+		if(defaultValue){
+			if(list_has_options){
+				var { selectValue } = list['list'].find(option => (option.hasOwnProperty('defaultValue') && option['defaultValue']));
+
+				if(selectValue){
+					return {
+						label: createLabel(selectValue), 
+						value: selectValue
+					}
+				}
+			}
+
+			return false;
+		}
+
 
 		if(list.hasOwnProperty('optgroups') && list['optgroups'].length){
 			list['optgroups'].forEach((optgroup, indexOptgroup) => {
@@ -458,7 +273,7 @@ export default function Generator({ listActivators, listActions, setListActivato
 				if(list_has_options){
 					list['list'].filter(option => (option.hasOwnProperty('optgroup') && (option['optgroup'] === indexOptgroup))).forEach(option => {
 						optgroup_options.push({ 
-							label: option['optionDescription'], 
+							label: createLabel(option['selectValue']), 
 							value: option['selectValue']  
 						});
 					});
@@ -466,7 +281,7 @@ export default function Generator({ listActivators, listActions, setListActivato
 
 				if(optgroup_options.length){
 					options.push({
-						label: optgroup,
+						label: t(typeList + ".optgroups." + optgroup),
 						options: optgroup_options
 					});
 				}
@@ -478,7 +293,7 @@ export default function Generator({ listActivators, listActions, setListActivato
 
 			list['list'].filter(option => !option.hasOwnProperty('optgroup')).forEach(option => {
 				options_without_optgroup.push({
-					label: option['optionDescription'], 
+					label: createLabel(option['selectValue']), 
 					value: option['selectValue']
 				});
 			})
@@ -496,20 +311,11 @@ export default function Generator({ listActivators, listActions, setListActivato
 		return options;
 	}; 
 
-	const getDefaultValueOptionList = (list) => {
-		if(list.hasOwnProperty('list') && list['list'].length){
-			var defaultValue = list['list'].find(option => (option.hasOwnProperty('defaultValue') && option['defaultValue']));
+	const createPlaceholderInput = (typeList, state) => {
+		var placeholder_i18n = typeList+"."+state['selectValue']+".placeholder";
 
-			if(defaultValue){
-				return {
-					label: defaultValue['optionDescription'], 
-					value: defaultValue['selectValue']
-				}
-			}
-
-			return false;
-		}
-	}
+		return (state.placeholder || (i18n.exists(placeholder_i18n) ? t(placeholder_i18n) : null) || t(typeList+".defaultValues.placeholder"));
+	};
 
 
 	return (
@@ -526,6 +332,7 @@ export default function Generator({ listActivators, listActions, setListActivato
 										<input
 											type="text"
 											name="description"
+											placeholder={t("descriptionHotkeyGenerator")}
 											className="form-control"
 											onChange={_handleChangDescription}
 											value={descriptionHotKey || ""}
@@ -543,10 +350,10 @@ export default function Generator({ listActivators, listActions, setListActivato
 										<div className="col">
 											<div className="row">
 												<div className="col-12 col-md-4  p-md-0">
-													<Select defaultValue={getDefaultValueOptionList(listActivatorsObj)} onChange={onchangeActivator} name="activator" aria-label="Selector de activador" options={listInfoToOptions(listActivators)} />
+													<Select onChange={onchangeActivator} name="activator" aria-label="Selector de activador" options={listInfoToOptions(listActivators, "listActivators")} />
 												</div>
 												<div className="col">
-													{(stateActivator.selectValue === "press")
+													{stateActivator.selectValue ?  (stateActivator.selectValue === "press")
 														? <InputKeyPress
 															stateValue={stateActivatorKeysPress}
 															setStateValue={setStateActivatorKeysPress}
@@ -558,17 +365,17 @@ export default function Generator({ listActivators, listActions, setListActivato
 															name="activator_text"
 															value={stateActivator.value || ""}
 															onChange={_handleChangeActivatorText}
-															placeholder={stateActivator.placeholder || listActivatorsObj.defaultValues.placeholder}
+															placeholder={createPlaceholderInput("listActivators", stateActivator)}
 															className="form-control"
 															required="required"
 														/>
-													}
+													: ""}
 												</div>
 											</div>
 
 											<div className="row">
 												<div className="col p-md-0">
-													<p className="activator_description text-muted small mt-2" > {stateActivator.description} </p>
+													<p className="activator_description text-muted small mt-2" > {stateAction.selectValue ?  t("listActivators."+stateActivator.selectValue+".description") : ""} </p>
 												</div>
 											</div>
 										</div>
@@ -580,7 +387,7 @@ export default function Generator({ listActivators, listActions, setListActivato
 										<div className="col">
 											<div className="row">
 												<div className={`col-12  pl-md-0 ${stateAction.hideInput ? "col-md" : "pr-md-0 col-md-4"}`}>
-													<Select defaultValue={getDefaultValueOptionList(listActionsObj)} onChange={onchangeAction} name="action" aria-label="Selector de accion" options={listInfoToOptions(listActions)} />
+													<Select onChange={onchangeAction} name="action" aria-label="Selector de accion" options={listInfoToOptions(listActions, "listActions")} />
 												</div>
 												<div className={`col ${stateAction.hideInput ? "d-none" : ""}`}>
 													<input
@@ -588,7 +395,7 @@ export default function Generator({ listActivators, listActions, setListActivato
 														name="action_text"
 														value={stateAction.value || ""}
 														onChange={_handleChangeActionText}
-														placeholder={stateAction.placeholder || listActionsObj.defaultValues.placeholder}
+														placeholder={createPlaceholderInput("listActions", stateAction)}
 														className={`form-control ${(stateAction.readOnly || listActionsObj.defaultValues.readOnly) ? "readonly" : ""}`} 
 														required={stateAction.required || listActionsObj.defaultValues.required} 
 														disabled={stateAction.hideInput ? true : false}
@@ -612,7 +419,7 @@ export default function Generator({ listActivators, listActions, setListActivato
 
 											<div className="row">
 												<div className="col p-md-0">
-													<p className="action_description text-muted small mt-2" >  {stateAction.description}  </p>
+													<p className="action_description text-muted small mt-2" >  { stateAction.selectValue ?  t("listActions."+stateAction.selectValue+".description") : ""}  </p>
 												</div>
 											</div>
 										</div>
