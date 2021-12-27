@@ -131,3 +131,22 @@ export const autohotkey = {
         }
     }
 }
+
+export const autohotkeyGenerator = {
+    product: {
+        name: "AutoHotKey Generator",
+        email: {
+            main: "general@autohotkeygenerator.com"
+        },
+        socialNetworks: {
+            twitter: "https://www.twitter.com/ahkGenerator",
+            buymeacoffee: "https://www.buymeacoffee.com/andreinariera"
+        }
+    },
+    company: {
+        address: "Argentina, buenos aires, la plata",
+        crowdfunding: {
+            buymeacoffee: "https://www.buymeacoffee.com/andreinariera"
+        }
+    } 
+};

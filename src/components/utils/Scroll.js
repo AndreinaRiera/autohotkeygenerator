@@ -16,6 +16,6 @@ export function Scroll(props) {
     }
 
     return (
-        <a href={to} className={className} onClick={scrollTo} data-accordion={dataAccordion}>{children}</a>
+        <a href={to} className={`${className} link`} onClick={scrollTo} data-accordion={dataAccordion}>{children}</a>
     )
 }

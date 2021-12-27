@@ -74,7 +74,11 @@ figure {
   position: absolute;
 }
 
-
+a:not(.link):not(.btn):not(.navbar-brand):not(.nav-link){
+  text-decoration: none;
+  color: unset;
+  font-weight: unset;
+}
 
 
 /* STYLES FOR BOOTSTRAP */

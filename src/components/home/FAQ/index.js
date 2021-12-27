@@ -1,9 +1,9 @@
 import './style.scss';
-import { useTranslation } from 'react-i18next';
+import { useTranslation, Trans } from 'react-i18next';
 import { getCurrentLocale, autohotkey } from "../../../i18n/list";
 
-import {Accordion, Card} from '../../utils/Accordion';
-import {Quote}   from '../../utils/Quote';
+import { Accordion, Card } from '../../utils/Accordion';
+import { Quote } from '../../utils/Quote';
 import { Scroll } from '../../utils/Scroll';
 import { NumericList } from '../../utils/List';
 
@@ -19,8 +19,13 @@ export default function FAQ() {
     const RenderLis = () => {
         var li = [];
         for (var i = 1; i < 5; i++) {
-            li.push(<li dangerouslySetInnerHTML={{__html: t("FAQ.path_and_name_of_programs.list."+i)}} ></li>);
-        } 
+            li.push(<li key={i} >
+                <Trans
+                    i18nKey={`FAQ.path_and_name_of_programs.list.${i}`}
+                    components={{ strong: <strong /> }}
+                />
+            </li>);
+        }
 
         return li;
     };
@@ -38,8 +43,8 @@ export default function FAQ() {
                                             <RenderLis />
                                         </NumericList>
                                     </div>
-                                    <div  className="col-5 d-none d-md-block">
-                                         <img src="/images/search_program.png" with="100%" alt="Imagen sobre pantalla de computadora" />
+                                    <div className="col-5 d-none d-md-block">
+                                        <img src="/images/search_program.png" with="100%" alt="Imagen sobre pantalla de computadora" />
                                     </div>
                                 </div>
                             </Card>
@@ -51,7 +56,7 @@ export default function FAQ() {
                                         </Quote>
 
                                         <p className="text-center">
-                                            {["-", "(", ")", "[", "]", "{", "}", "'", ":", ";", '"', "/", "\\",".","?","!", "Space", "Enter"].map((character, i) => (
+                                            {["-", "(", ")", "[", "]", "{", "}", "'", ":", ";", '"', "/", "\\", ".", "?", "!", "Space", "Enter"].map((character, i) => (
                                                 <kbd key={i}>{character}</kbd>
                                             ))}
                                         </p>
@@ -69,14 +74,14 @@ export default function FAQ() {
                             <Card numb="4" id="ideas" title={t("FAQ.ideas.title")}>
                                 <div className="row">
                                     <div className="col pt-md-4">
-                                        
+
                                     </div>
                                 </div>
                             </Card>
                         </Accordion>
                     </div>
                 </div>
-            </div>    
+            </div>
         </section>
     )
 }

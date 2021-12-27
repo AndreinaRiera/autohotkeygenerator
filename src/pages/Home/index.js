@@ -22,6 +22,8 @@ export default function Home() {
   const [listActivators, setListActivators] = useState({});
   const [listActions, setListActions] = useState({});
 
+  const createTrans = (name) => <Trans i18nKey={"home." + name} components={{ strong: <strong /> }} />;
+
   return (
     <div id="App">
       <Header />
@@ -30,26 +32,20 @@ export default function Home() {
       <div className="container mt-4 pt-4">
         <div className="row">
           <div className="col-12 offset-md-1 col-md-10">
-            <Quote cite="AutoHotKey official site" url="https://www.autohotkey.com/" >
+            <Quote cite={t("home.AutoHotkeyCite")} url="https://www.autohotkey.com/" >
               {t("home.AutoHotkey")}
             </Quote>
           </div>
         </div>
 
-        <Steps number="1" step={t("home.stepDownload")}>
+        <Steps number="1" step={createTrans("stepDownload")}>
           <div className="col-12 col-md-auto text-center">
             <a href="https://www.autohotkey.com/" target="_blank" className="btn btn-secondary  btn_download" >{t("home.download")}</a>
           </div>
         </Steps>
 
-        <Steps number="2">{/* 
-          <span dangerouslySetInnerHTML={{ __html: t('home.stepCreate') }} /> */}
-
-          <Trans
-            i18nKey="home.stepCreate"
-            components={{ bold: <strong /> }}
-          />
-
+        <Steps number="2">
+          {createTrans("stepCreate")}
         </Steps>
       </div>
 
@@ -68,13 +64,13 @@ export default function Home() {
           </div>
           <div className="col">
             <Steps number="3">
-              <span dangerouslySetInnerHTML={{ __html: t('home.stepRunAutomatically') }} />
+              {createTrans("stepRunAutomatically")}
             </Steps>
           </div>
         </div>
 
         <Steps number="4">
-          <span dangerouslySetInnerHTML={{ __html: t('home.stepReady') }} />
+          {createTrans("stepReady")}
         </Steps>
       </div>
 

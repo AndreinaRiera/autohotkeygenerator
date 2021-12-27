@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import listLocales, { getCurrentLocale, getListCurrentLocales } from "../../../i18n/list";
+import listLocales, { getCurrentLocale, getListCurrentLocales, autohotkeyGenerator } from "../../../i18n/list";
 
 import Swal from 'sweetalert2'
 import Navbar from 'react-bootstrap/Navbar'
@@ -16,7 +16,6 @@ export default function MainNavbar() {
   const currentLocale = getCurrentLocale(i18n.language);
 
   const fireMsg = () => {
-
     Swal.fire({
       title: t("navbar.navbarText.swal.title"),
       icon: 'question',
@@ -29,7 +28,7 @@ export default function MainNavbar() {
 
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" id="main_navbar" variant="dark">
-      <Navbar.Brand href="#home">AutoHotKey Generator </Navbar.Brand>
+      <Navbar.Brand href="#home"> {autohotkeyGenerator['product']['name']} </Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto">
@@ -43,10 +42,16 @@ export default function MainNavbar() {
             </Animate>
           </Navbar.Text>
 
-          <NavDropdown className='ml-md-5' title={listLocales.hasOwnProperty(currentLocale) ? listLocales[currentLocale]['nativeName'] : ""}>
+          <NavDropdown className='ml-md-4' title={listLocales.hasOwnProperty(currentLocale) ? listLocales[currentLocale]['nativeName'] : ""}>
             {
               getListCurrentLocales().map(language => (
-                <NavDropdown.Item key={language} disabled={(language == currentLocale) ? true : false} onClick={() => { i18n.changeLanguage(language) }} >{listLocales.hasOwnProperty(language) ? listLocales[language]['nativeName'] : ""}</NavDropdown.Item>
+                <NavDropdown.Item
+                  key={language}
+                  disabled={(language === currentLocale) ? true : false}
+                  onClick={() => { i18n.changeLanguage(language) }}
+                >
+                  {listLocales.hasOwnProperty(language) ? listLocales[language]['nativeName'] : language}
+                </NavDropdown.Item>
               ))
             }
           </NavDropdown>

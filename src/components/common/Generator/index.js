@@ -1,17 +1,16 @@
 import "./style.scss";
 import React, { useState, useEffect } from "react";
 
-import { useTranslation } from 'react-i18next';
-import { getCurrentLocale } from "../../../i18n/list";
-import {listActivatorsObj} from './listActivatorsObj';
-import {listActionsObj} from './listActionsObj';
+import { useTranslation, Trans } from 'react-i18next';
+import { listActivatorsObj } from './listActivatorsObj';
+import { listActionsObj } from './listActionsObj';
 
 import Select from "../../utils/Select";
 
 import { Scroll } from "../../utils/Scroll";
 
-import {createFile, downloadFile} from "../../../utils/utils";
-import {swalDelete} from "../../../utils/swalFire";
+import { createFile, downloadFile } from "../../../utils/utils";
+import { swalDelete } from "../../../utils/swalFire";
 
 //import Modal from "../../utils/Modal";
 import InputKeyPress from "./InputKeyPress";
@@ -23,8 +22,8 @@ export default function Generator({ listActivators, listActions, setListActivato
 	const [stateModal, setStateModal] = useState(false);
 
 	const [stateDetectionCursor, setstateDetectionCursor] = useState(false);
-	const [stateCursorPos, setStateCursorPos]             = useState([[0, 0], [0, 0]]);
-	const [stateclickFocus, setstateClickFocus]           = useState(false);
+	const [stateCursorPos, setStateCursorPos] = useState([[0, 0], [0, 0]]);
+	const [stateclickFocus, setstateClickFocus] = useState(false);
 
 	function trackCursor() {
 		setTimeout(() => {
@@ -47,7 +46,7 @@ export default function Generator({ listActivators, listActions, setListActivato
 		}, 200);
 		setstateDetectionCursor(true);
 	}
-	
+
 
 	useEffect(() => {
 		setListActivators(listActivatorsObj);
@@ -64,7 +63,7 @@ export default function Generator({ listActivators, listActions, setListActivato
 
 
 
-	
+
 
 
 
@@ -110,7 +109,7 @@ export default function Generator({ listActivators, listActions, setListActivato
 	var [activatorKeys, setActivatorKeys] = useState([]);
 
 
-	
+
 
 	const [stateActivator, setStateActivator] = useState(listActivatorsObj.list[0]);
 
@@ -118,9 +117,9 @@ export default function Generator({ listActivators, listActions, setListActivato
 		setStateActivator(odlStateActivator => ({ ...odlStateActivator, value: e ? e.target.value : value }));
 	};
 
-	function onchangeActivator(e) { 
+	function onchangeActivator(e) {
 		setStateActivator(activatorBySelectValue(e.value));
-		setStateActivatorKeysPress(""); 
+		setStateActivatorKeysPress("");
 	}
 
 
@@ -169,13 +168,13 @@ export default function Generator({ listActivators, listActions, setListActivato
 				text: t("generator.swalDeleteHotkeyQuestion"),
 				title: ""
 			}).then(confirm => {
-				if(confirm){
+				if (confirm) {
 					setListHotKeys_(odlListHotKeys => (odlListHotKeys.filter((element, index) => { return index !== id; })));
 				}
 			}).catch(err => {
 				console.error(err);
 			});
-			
+
 		},
 		generateFile: function () {
 			var result = `#NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
@@ -214,7 +213,7 @@ export default function Generator({ listActivators, listActions, setListActivato
 			},
 			cursor: stateCursorPos[0].join(" ")
 		};
-		
+
 		var activator = activatorBySelectValue(stateActivator.selectValue).result(INFO);
 		if (!activator) { return false; }
 
@@ -249,13 +248,13 @@ export default function Generator({ listActivators, listActions, setListActivato
 		const createLabel = selectValue => t(typeList + "." + selectValue + ".optionDescription");
 
 
-		if(defaultValue){
-			if(list_has_options){
+		if (defaultValue) {
+			if (list_has_options) {
 				var { selectValue } = list['list'].find(option => (option.hasOwnProperty('defaultValue') && option['defaultValue']));
 
-				if(selectValue){
+				if (selectValue) {
 					return {
-						label: createLabel(selectValue), 
+						label: createLabel(selectValue),
 						value: selectValue
 					}
 				}
@@ -265,56 +264,68 @@ export default function Generator({ listActivators, listActions, setListActivato
 		}
 
 
-		if(list.hasOwnProperty('optgroups') && list['optgroups'].length){
+		if (list.hasOwnProperty('optgroups') && list['optgroups'].length) {
 			list['optgroups'].forEach((optgroup, indexOptgroup) => {
 
 				var optgroup_options = [];
 
-				if(list_has_options){
+				if (list_has_options) {
 					list['list'].filter(option => (option.hasOwnProperty('optgroup') && (option['optgroup'] === indexOptgroup))).forEach(option => {
-						optgroup_options.push({ 
-							label: createLabel(option['selectValue']), 
-							value: option['selectValue']  
+						optgroup_options.push({
+							label: createLabel(option['selectValue']),
+							value: option['selectValue']
 						});
 					});
 				}
 
-				if(optgroup_options.length){
+				if (optgroup_options.length) {
 					options.push({
 						label: t(typeList + ".optgroups." + optgroup),
 						options: optgroup_options
 					});
 				}
-			}) 
+			})
 		};
 
-		if(list_has_options){
+		if (list_has_options) {
 			var options_without_optgroup = [];
 
 			list['list'].filter(option => !option.hasOwnProperty('optgroup')).forEach(option => {
 				options_without_optgroup.push({
-					label: createLabel(option['selectValue']), 
+					label: createLabel(option['selectValue']),
 					value: option['selectValue']
 				});
 			})
 
-			if(options.length){
+			if (options.length) {
 				options.push({
 					label: "-",
 					options: options_without_optgroup
 				});
-			}else{
+			} else {
 				options = options.concat(options_without_optgroup);
 			}
 		}
 
 		return options;
-	}; 
+	};
 
 	const createPlaceholderInput = (typeList, state) => {
-		var placeholder_i18n = typeList+"."+state['selectValue']+".placeholder";
+		var placeholder_i18n = typeList + "." + state['selectValue'] + ".placeholder";
 
-		return (state.placeholder || (i18n.exists(placeholder_i18n) ? t(placeholder_i18n) : null) || t(typeList+".defaultValues.placeholder"));
+		return (state.placeholder || (i18n.exists(placeholder_i18n) ? t(placeholder_i18n) : null) || t(typeList + ".defaultValues.placeholder"));
+	};
+
+	const createDescriptionOptionSelected = (typeList, state) => {
+		if (state.selectValue) {
+			return <Trans
+				i18nKey={`${typeList}.${state.selectValue}.description`}
+				components={{ scroll: <Scroll to="#ending_characters" accordion /> }
+				}
+			/>;
+		}
+
+		return "";
 	};
 
 
@@ -353,7 +364,7 @@ export default function Generator({ listActivators, listActions, setListActivato
 													<Select onChange={onchangeActivator} name="activator" aria-label="Selector de activador" options={listInfoToOptions(listActivators, "listActivators")} />
 												</div>
 												<div className="col">
-													{stateActivator.selectValue ?  (stateActivator.selectValue === "press")
+													{stateActivator.selectValue ? (stateActivator.selectValue === "press")
 														? <InputKeyPress
 															stateValue={stateActivatorKeysPress}
 															setStateValue={setStateActivatorKeysPress}
@@ -369,13 +380,13 @@ export default function Generator({ listActivators, listActions, setListActivato
 															className="form-control"
 															required="required"
 														/>
-													: ""}
+														: ""}
 												</div>
 											</div>
 
 											<div className="row">
 												<div className="col p-md-0">
-													<p className="activator_description text-muted small mt-2" > {stateAction.selectValue ?  t("listActivators."+stateActivator.selectValue+".description") : ""} </p>
+													<p className="activator_description text-muted small mt-2" > {createDescriptionOptionSelected("listActivators", stateActivator)} </p>
 												</div>
 											</div>
 										</div>
@@ -396,8 +407,8 @@ export default function Generator({ listActivators, listActions, setListActivato
 														value={stateAction.value || ""}
 														onChange={_handleChangeActionText}
 														placeholder={createPlaceholderInput("listActions", stateAction)}
-														className={`form-control ${(stateAction.readOnly || listActionsObj.defaultValues.readOnly) ? "readonly" : ""}`} 
-														required={stateAction.required || listActionsObj.defaultValues.required} 
+														className={`form-control ${(stateAction.readOnly || listActionsObj.defaultValues.readOnly) ? "readonly" : ""}`}
+														required={stateAction.required || listActionsObj.defaultValues.required}
 														disabled={stateAction.hideInput ? true : false}
 													/>
 													{/* <textarea 
@@ -419,7 +430,7 @@ export default function Generator({ listActivators, listActions, setListActivato
 
 											<div className="row">
 												<div className="col p-md-0">
-													<p className="action_description text-muted small mt-2" >  { stateAction.selectValue ?  t("listActions."+stateAction.selectValue+".description") : ""}  </p>
+													<p className="action_description text-muted small mt-2" > {createDescriptionOptionSelected("listActions", stateAction)} </p>
 												</div>
 											</div>
 										</div>
@@ -437,10 +448,13 @@ export default function Generator({ listActivators, listActions, setListActivato
 						<div className="card-header">
 							<div className="row">
 								<label className="col text-center text-lg-left">
-									{listHotKeys.length} atajos creados
+									<Trans
+										i18nKey={(listHotKeys.length === 1) ? "generator.hotkeyCreated" : "generator.hotkeysCreated"}
+										values={{ count: listHotKeys.length }}
+									/>
 								</label>
 								<div className="col-12 text-center col-lg-auto">
-									<button type="button" className="btn btn-secondary" onClick={setListHotKeys.generateFile}> { t("generator.generateAHK") } </button>
+									<button type="button" className="btn btn-secondary" onClick={setListHotKeys.generateFile}> {t("generator.generateAHK")} </button>
 								</div>
 							</div>
 						</div>
@@ -452,8 +466,8 @@ export default function Generator({ listActivators, listActions, setListActivato
 											<div className="col">
 												{hotKey.name ? <b className="">{hotKey.name}</b> : ""}
 
-												<p className="p-0 m-0">{hotKey.activator.description} {hotKey.activator.text ? '"'+hotKey.activator.text+'"' : ""}</p>
-												<p className="p-0 m-0">{hotKey.action.description}  {hotKey.action.text ? '"'+hotKey.action.text+'"' : ""}</p>
+												<p className="p-0 m-0">{hotKey.activator.description} {hotKey.activator.text ? '"' + hotKey.activator.text + '"' : ""}</p>
+												<p className="p-0 m-0">{hotKey.action.description}  {hotKey.action.text ? '"' + hotKey.action.text + '"' : ""}</p>
 											</div>
 											<div className="col-auto">
 												<div class="dropdown">
@@ -472,7 +486,14 @@ export default function Generator({ listActivators, listActions, setListActivato
 							}
 
 							{
-								listHotKeys.length ? "" : <li className="list-group-item text-center text-muted">{t("generator.withoutHotkeys1")} <Scroll to="#ideas" className="scroll" accordion>{t("generator.withoutHotkeys2")}</Scroll></li>
+								listHotKeys.length
+									? ""
+									: <li className="list-group-item text-center text-muted">
+										<Trans
+											i18nKey={"generator.withoutHotkeys"}
+											components={{ scroll: <Scroll to="#ideas" accordion /> }}
+										/>
+									</li>
 							}
 						</ul>
 					</div>

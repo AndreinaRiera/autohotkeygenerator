@@ -6,8 +6,9 @@
   "finalCharacter": "caracter final",
 
   "home": {
-    "AutoHotkey"          : "AutoHotkey is a free, open-source scripting language for Windows that allows users to easily create small to complex scripts for all kinds of tasks such as: form fillers, auto-clicking, macros, etc.",
-    "stepDownload"        : "Si aun no lo has hecho, <bold>descarga autohotkey</bold> desde su pagina oficial. Y sigue los pasos hasta instalarlo correctamente. ",
+    "AutoHotkey"          : "AutoHotkey es un lenguaje de secuencias de comandos de código abierto y gratuito para Windows, que permite a los usuarios crear fácilmente secuencias de comandos pequeñas o complejas para todo tipo de tareas como: rellenos de formularios, clics automáticos, macros, etc.",
+    "AutoHotkeyCite"      : "Traducido del sitio oficial de autohotkey",
+    "stepDownload"        : "Si aun no lo has hecho, <strong>descarga autohotkey</strong> desde su pagina oficial. Y sigue los pasos hasta instalarlo correctamente. ",
     "download"            : "Ir a la pagina oficial",
     "stepCreate"          : "<strong>¡Ahora es momento de crear tus atajos!</strong> Utiliza el generador de abajo para agregar la descripcion de tu atajo, luego el activador que desencadenara la accion, y por ultimo lo que quieres que ocurra. Al terminar, presiona el boton para crear el hotkey. Puedes agregar tantos hotkeys como quieras. Al terminar presiona el boton para generar y descargar tu archivo AHK",
     "altImgFile"          : "Imagen de archivo llamado myHotkeys.ahk",
@@ -33,7 +34,7 @@
     "popoverImg" : {
       "title"  : "Este vector es cortesia de ",
       "freepik": "freepik.es",
-      "content": "Freepik es una biblioteca de imagenes, vectores y videos libres de copyright <br /><br /> ¡Con mucho contenido gratis para todos tus proyectos!"
+      "content": "<p>Freepik es una biblioteca de imagenes, vectores y videos libres de copyright</p> <p>¡Con mucho contenido gratis para todos tus proyectos!</p>"
     }
   },
 
@@ -53,7 +54,7 @@
       "placeholder": "esto"
     },
     "text": {
-      "description"       : "El evento se activara cuando escribas la palabra o frase y luego un caracter final, como punto o coma",
+      "description"       : "El evento se activara cuando escribas la palabra o frase y luego un <scroll> caracter final </scroll>, como punto o coma",
       "placeholder"       : "esto",
       "optionDescription" : "Al escribir",
       "defaultValueResult": "texto"
@@ -122,18 +123,18 @@
   },
 
   "descriptionHotkeyGenerator": "Suplantar esto por esto",
-
+ 
   "generator": {
+    "hotkeyCreated"           : "{{count}} atajo creado",
+    "hotkeysCreated"          : "{{count}} atajos creados",
     "swalDeleteHotkeyQuestion": "¿Estas seguro de borrar este hotkey?",
     "descriptionHotkey"       : "Descripcion",
     "createHotkey"            : "Crear hotkey",
     "waitingClick"            : "Esperando click",
     "detectClick"             : "Detectar",
-    "hotkeysCreated"          : "atajos creados",
     "generateAHK"             : "Generar ahk",
     "deleteHotkey"            : "Borrar",
-    "withoutHotkeys1"         : "Aun no has agregado hotkeys, ¿Quieres ideas? Mira la ",
-    "withoutHotkeys2"         : "seccion de preguntas frecuentes"
+    "withoutHotkeys"          : "Aun no has agregado hotkeys, ¿Quieres ideas? Mira la <scroll> seccion de preguntas frecuentes </scroll> "
   },
 
   "listItems": {
@@ -175,8 +176,22 @@
   },
 
   "footer": {
-    "documentation": "Documentacion oficial",
-    "made"         : "Hecho con",
-    "by"           : "por y para amantes de la productividad"
+    "socialNetworks": "Redes sociales",
+    "contacts"      : "Contactos",
+    "newsletter"    : "Newsletter",
+    "product"       : "Producto",
+    "documentation" : "Documentacion",
+    "prices"        : "Precios",
+    "terms"         : "Terminos y condiciones de uso",
+    "developing"    : "Desarrollo",
+    "resources"     : "Tecnologias y recursos",
+    "crowdfunding"  : "Crowdfunding",
+    "updates"       : "Futuras actualizaciones",
+
+    "bottom": {
+      "documentation": "Documentacion oficial de AHK",
+      "made"         : "Hecho con",
+      "by"           : "por y para amantes de la productividad"
+    }
   }
 }

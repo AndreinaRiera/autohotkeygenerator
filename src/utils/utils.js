@@ -26,7 +26,7 @@ export function goTo(destination) {
 
 export function openElementAccordion(idElement){
    const BTN_CARD_ACCORDION = document.querySelector(idElement+" button");
-   console.log(idElement, BTN_CARD_ACCORDION);
+   
    if(BTN_CARD_ACCORDION.classList.contains("collapsed")){
       BTN_CARD_ACCORDION.click();
    }
@@ -51,7 +51,7 @@ export function htmlEntities(str) {
 
 
 export function stringStartsWith(URL, word) {
-   var words = word.isArray ? word : [word];
+   var words = Array.isArray(word) ? word : [word];
        URL   = URL.toUpperCase();
 
    words.forEach(word => {
@@ -63,6 +63,21 @@ export function stringStartsWith(URL, word) {
    return false;
 }
 
+
+function strRemove(phrase, remove) {
+   var removes = Array.isArray(remove) ? remove : [remove];
+
+   removes.forEach(word => {
+      phrase = phrase.replaceAll(word,'');
+   });
+
+   return phrase;
+}
+
+
+
+// @1 URL, REDIRECCIONAMIENTOS E HIPERVINCULOS
+
 export function isValidURL(URL) {
    if(stringStartsWith(URL, ['https:', 'http:', 'www.'])){
       return true;
@@ -71,6 +86,17 @@ export function isValidURL(URL) {
    return false;
 }
 
+
+export function beautifyURL(URL) {
+   return strRemove(URL, ['https://', 'http://', 'https:', 'http:', 'www.']);
+}
+
+
+export function openURL(URL, blank = "_blank") {
+   if(URL){
+      window.open(URL, blank);
+   }
+}
 
 
 
@@ -127,15 +153,5 @@ export function downloadFile(href, name) {
     a.href = href;
     a.download = name;
     a.click();
-}
-
-
-
-// REDIRECCIONAMIENTO
-
-export function openURL(URL, blank = "_blank") {
-   if(URL){
-      window.open(URL, blank);
-   }
 }
 
