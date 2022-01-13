@@ -6,12 +6,13 @@ export const listActionsObj =  {
             readOnly: false,
             required: true
         },
-        list: [
+        list: [ 
             {
                 selectValue: "change",
                 defaultValue: true,
                 optgroup: 1,
                 key: "SendRaw",
+                textarea: true,
                 url: '/commands/Send.htm',
                 result: ({ action }, defaultVale) => {
                     return "SendRaw" + includeActionText(action ? action.text : defaultVale, false);
@@ -20,6 +21,7 @@ export const listActionsObj =  {
                 selectValue: "write",
                 optgroup: 1,
                 key: "SendRaw",
+                textarea: true,
                 result: ({ action }, defaultVale) => {
                     return "SendRaw" + includeActionText(action ? action.text : defaultVale, false);
                 }
@@ -90,9 +92,9 @@ export const listActionsObj =  {
             });
         }
         // saltos de linea
-        actionText = actionText.replace(/(?:\r\n|\r|\n)/g, ' `n ');
+        actionText = actionText.replace(/(?:\r\n|\r|\n)/g, '`n');
         // tab
-        actionText = actionText.replace(/\t/g, ' `t ');
+        actionText = actionText.replace(/\t/g, '`t');
     
         if (changeStrQuotes) {
             actionText = actionText.replaceAll("\"", "")

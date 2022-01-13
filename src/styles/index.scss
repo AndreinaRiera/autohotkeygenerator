@@ -80,6 +80,10 @@ a:not(.link):not(.btn):not(.navbar-brand):not(.nav-link){
   font-weight: unset;
 }
 
+.link{
+  color: #0056b3;
+}
+
 
 /* STYLES FOR BOOTSTRAP */
 
@@ -110,9 +114,22 @@ a:not(.link):not(.btn):not(.navbar-brand):not(.nav-link){
   }
 }
 
+.dropdown-item{
+  cursor: pointer;
+
+  .fas{
+    margin-right: 5px;
+  }
+}
 
 
+.secondary.modal .modal-content{
+    border: none;
+}
 
+.modal .modal-footer{
+  display: inline-block !important;
+}
 
 
 

@@ -1,25 +1,31 @@
 import "./style.scss";
 import React, { useState, useEffect } from "react";
 
+import { Howl } from 'howler';
+import confetti from 'canvas-confetti';
+
 import { useTranslation, Trans } from 'react-i18next';
 import { listActivatorsObj } from './listActivatorsObj';
 import { listActionsObj } from './listActionsObj';
 
-import Select from "../../utils/Select";
+import Select from "@helpfulComponents/Select";
 
-import { Scroll } from "../../utils/Scroll";
+import { Scroll } from "@helpfulComponents/Scroll";
 
-import { createFile, downloadFile } from "../../../utils/utils";
-import { swalDelete } from "../../../utils/swalFire";
+import { createFile, downloadFile } from "@functions/utils";
+import { swalDelete, swalAlert } from "@functions/swalFire";
 
-//import Modal from "../../utils/Modal";
+import ModalDeveloping from "../ModalDeveloping";
+import ModalFirstHotkey from "./ModalFirstHotkey";
+
 import InputKeyPress from "./InputKeyPress";
 
 export default function Generator({ listActivators, listActions, setListActivators, setListActions }) {
 
 	const { t, i18n } = useTranslation();
 
-	const [stateModal, setStateModal] = useState(false);
+	//const [stateModalCreateAHK, setStateModalCreateAHK] = useState(false);
+	const [stateModalDeveloping, setStateModalDeveloping] = useState(false);
 
 	const [stateDetectionCursor, setstateDetectionCursor] = useState(false);
 	const [stateCursorPos, setStateCursorPos] = useState([[0, 0], [0, 0]]);
@@ -118,8 +124,10 @@ export default function Generator({ listActivators, listActions, setListActivato
 	};
 
 	function onchangeActivator(e) {
-		setStateActivator(activatorBySelectValue(e.value));
-		setStateActivatorKeysPress("");
+		if (stateActivator.selectValue !== e.value) {
+			setStateActivator(activatorBySelectValue(e.value));
+			setStateActivatorKeysPress("");
+		}
 	}
 
 
@@ -146,14 +154,57 @@ export default function Generator({ listActivators, listActions, setListActivato
 		}
 
 		setStateAction(odlStateAction => ({ ...odlStateAction, value: e ? e.target.value : value }));
+		setstateTexStart(0);
 	};
 
 	function onchangeAction(e) {
-		setStateAction(actionBySelectValue(e.value));
-		setStateActivatorKeysPress("");
+		if (stateAction.selectValue !== e.value) {
+			setStateAction(actionBySelectValue(e.value));
+		}
 	}
 
+	const textAreaRef = React.createRef();
+	const [stateTexStart, setstateTexStart] = useState(0);
 
+	function tabPress(event) {
+		if (event.keyCode === 9) {
+			// Prevent the default action to not lose focus when tab
+			event.preventDefault();
+
+			// Get the cursor position
+			const { selectionStart, selectionEnd } = event.target;
+
+			setStateAction(
+				odlStateAction => ({
+					...odlStateAction,
+					value:
+						odlStateAction.value.substring(0, selectionStart) +
+						"\t" + // '\t' = tab, size can be change by CSS
+						odlStateAction.value.substring(selectionEnd)
+				})
+			);
+
+			setstateTexStart(selectionStart + 1);
+		}
+	}
+
+	useEffect(() => {
+		if (stateTexStart) {
+			textAreaRef.current.selectionStart = textAreaRef.current.selectionEnd = stateTexStart;
+		}
+	}, [stateAction])
+
+
+
+
+
+
+
+
+
+
+	const [stateFirstHotkey, setstateFirstHotkey] = useState(true)
+	const [stateModalFirstHotkey, setstateModalFirstHotkey] = useState(false)
 
 	const LINE_BREAK = "\n";
 
@@ -174,9 +225,26 @@ export default function Generator({ listActivators, listActions, setListActivato
 			}).catch(err => {
 				console.error(err);
 			});
-
 		},
 		generateFile: function () {
+			if (listHotKeys.length) {
+				setListHotKeys.generateFileConfirmed();
+			} else {
+				swalAlert({
+					title: t("generator.generateFile.title"),
+					html: t("generator.generateFile.html"),
+					footer: t("generator.generateFile.footer"),
+					linkScroll: true,
+					confirmButtonText: t("generator.generateFile.confirmButtonText"),
+					showCancelButton: false
+				}).then(confirmed => {
+					if (confirmed) {
+						setListHotKeys.generateFileConfirmed();
+					}
+				}).catch(err => console.err(err));
+			}
+		},
+		generateFileConfirmed: function () {
 			var result = `#NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
 			; #Warn  ; Enable warnings to assist with detecting common errors.
 			SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
@@ -184,11 +252,95 @@ export default function Generator({ listActivators, listActions, setListActivato
 
 			result += LINE_BREAK + LINE_BREAK;
 
+			result += `; Generated file from AutoHotkeyGenerator.com`;
+
+			result += LINE_BREAK + LINE_BREAK;
+
 			result += listHotKeys.map(hotKey => hotKey.result).join(LINE_BREAK + LINE_BREAK);
 			downloadFile(createFile(result), "myHotkeys.ahk");
-			console.log(result);
+
+			if (stateFirstHotkey) {
+				setstateModalFirstHotkey(true);
+				setstateFirstHotkey(false);
+
+				setTimeout(() => {
+					new Howl({
+						src: ['/sounds/tada.mp3'],
+						autoplay: true,
+						volume: 0.05
+					});
+
+					function displayConfetti(particleRatio, opts) {
+						confetti(Object.assign({}, {
+							scalar: 1.6,
+							origin: { y: 0.5 },
+							disableForReducedMotion: true
+						}, opts, {
+							particleCount: Math.floor(300 * particleRatio)
+						}));
+					}
+
+					displayConfetti(0.25, {
+						spread: 26,
+						angle: 45,
+						startVelocity: 55,
+					});
+					displayConfetti(0.2, {
+						spread: 60,
+						angle: 45,
+					});
+					displayConfetti(0.35, {
+						spread: 100,
+						decay: 0.91,
+						angle: 45,
+						scalar: 0.8
+					});
+					displayConfetti(0.1, {
+						spread: 120,
+						angle: 45,
+						startVelocity: 25,
+						decay: 0.92,
+						scalar: 1.2
+					});
+					displayConfetti(0.1, {
+						spread: 120,
+						angle: 45,
+						startVelocity: 45,
+					});
+
+					displayConfetti(0.25, {
+						spread: 26,
+						angle: 120,
+						startVelocity: 55,
+					});
+					displayConfetti(0.2, {
+						spread: 60,
+						angle: 120,
+					});
+					displayConfetti(0.35, {
+						spread: 100,
+						decay: 0.91,
+						angle: 120,
+						scalar: 0.8
+					});
+					displayConfetti(0.1, {
+						spread: 120,
+						angle: 120,
+						startVelocity: 25,
+						decay: 0.92,
+						scalar: 1.2
+					});
+					displayConfetti(0.1, {
+						spread: 120,
+						angle: 120,
+						startVelocity: 45,
+					});
+				}, 200);
+			}
 		}
 	};
+
+
 
 	function createHotKey(event = false) {
 		if (event) { event.preventDefault(); }
@@ -199,7 +351,6 @@ export default function Generator({ listActivators, listActions, setListActivato
 			name: descriptionHotKey,
 			activator: {
 				value: stateActivator.selectValue,
-				description: stateActivator.optionDescription,
 				text: stateActivator.value,
 				keys: {
 					value: activatorKeys,
@@ -208,7 +359,6 @@ export default function Generator({ listActivators, listActions, setListActivato
 			},
 			action: {
 				value: stateAction.selectValue,
-				description: stateAction.optionDescription,
 				text: stateAction.value
 			},
 			cursor: stateCursorPos[0].join(" ")
@@ -253,10 +403,12 @@ export default function Generator({ listActivators, listActions, setListActivato
 				var { selectValue } = list['list'].find(option => (option.hasOwnProperty('defaultValue') && option['defaultValue']));
 
 				if (selectValue) {
-					return {
+					/* return {
 						label: createLabel(selectValue),
 						value: selectValue
-					}
+					} */
+
+					return createLabel(selectValue);
 				}
 			}
 
@@ -320,8 +472,10 @@ export default function Generator({ listActivators, listActions, setListActivato
 		if (state.selectValue) {
 			return <Trans
 				i18nKey={`${typeList}.${state.selectValue}.description`}
-				components={{ scroll: <Scroll to="#ending_characters" accordion /> }
-				}
+				components={{
+					scrollEndingCharacters: <Scroll to="#ending_characters" accordion />,
+					scrollPath: <Scroll to="#Know_which_is_the_path_and_name_of_programs" accordion />
+				}}
 			/>;
 		}
 
@@ -329,11 +483,34 @@ export default function Generator({ listActivators, listActions, setListActivato
 	};
 
 
+	function getAttrsElementInputs(type = "activator") {
+		const isActivator = (type === "activator");
+
+		const state = isActivator ? stateActivator : stateAction;
+		const nameList = isActivator ? "listActivators" : "listActions";
+		const listObj = isActivator ? listActivatorsObj : listActionsObj;
+		const handleChange = isActivator ? _handleChangeActivatorText : _handleChangeActionText;
+
+		return {
+			name: "action_text",
+			value: state.value || "",
+			onChange: handleChange,
+			placeholder: createPlaceholderInput(nameList, state),
+			className: `form-control ${(state.readOnly || listObj.defaultValues.readOnly) ? "readonly" : ""}`,
+			required: state.required || listObj.defaultValues.required,
+			disabled: state.hideInput ? true : false,
+		};
+	}
+
+
+
+
+
 	return (
-		<section className="container" id="Generator">
+		<section className="container" id="GeneratorContainer">
 
 			<div className="row flex">
-				<div className="col">
+				<div className="col" id="Generator">
 					<form onSubmit={createHotKey} >
 						<div className="card card-primary">
 							<div className="card-header">
@@ -361,7 +538,7 @@ export default function Generator({ listActivators, listActions, setListActivato
 										<div className="col">
 											<div className="row">
 												<div className="col-12 col-md-4  p-md-0">
-													<Select onChange={onchangeActivator} name="activator" aria-label="Selector de activador" options={listInfoToOptions(listActivators, "listActivators")} />
+													<Select placeholder={listInfoToOptions(listActivators, "listActivators", "defaultValue")} onChange={onchangeActivator} name="activator" aria-label="Selector de activador" options={listInfoToOptions(listActivators, "listActivators")} />
 												</div>
 												<div className="col">
 													{stateActivator.selectValue ? (stateActivator.selectValue === "press")
@@ -373,12 +550,7 @@ export default function Generator({ listActivators, listActions, setListActivato
 														/>
 														: <input
 															type={stateActivator.type || listActivatorsObj.defaultValues.type}
-															name="activator_text"
-															value={stateActivator.value || ""}
-															onChange={_handleChangeActivatorText}
-															placeholder={createPlaceholderInput("listActivators", stateActivator)}
-															className="form-control"
-															required="required"
+															{...getAttrsElementInputs("activator")}
 														/>
 														: ""}
 												</div>
@@ -397,30 +569,22 @@ export default function Generator({ listActivators, listActions, setListActivato
 										<label className="col-12 col-md-3 col-xl-2 pb-3 pb-md-0">{t("action")}</label>
 										<div className="col">
 											<div className="row">
-												<div className={`col-12  pl-md-0 ${stateAction.hideInput ? "col-md" : "pr-md-0 col-md-4"}`}>
-													<Select onChange={onchangeAction} name="action" aria-label="Selector de accion" options={listInfoToOptions(listActions, "listActions")} />
+												<div className={`col-12  pl-md-0 ${(stateAction.hideInput || stateAction.textarea) ? "col-md" : "pr-md-0 col-md-4"}`}>
+													<Select placeholder={listInfoToOptions(listActions, "listActions", "defaultValue")} onChange={onchangeAction} name="action" aria-label="Selector de accion" options={listInfoToOptions(listActions, "listActions")} />
 												</div>
-												<div className={`col ${stateAction.hideInput ? "d-none" : ""}`}>
-													<input
-														type={listActionsObj.defaultValues.type || "text"}
-														name="action_text"
-														value={stateAction.value || ""}
-														onChange={_handleChangeActionText}
-														placeholder={createPlaceholderInput("listActions", stateAction)}
-														className={`form-control ${(stateAction.readOnly || listActionsObj.defaultValues.readOnly) ? "readonly" : ""}`}
-														required={stateAction.required || listActionsObj.defaultValues.required}
-														disabled={stateAction.hideInput ? true : false}
-													/>
-													{/* <textarea 
-														style={{height: (stateAction.heightInput || 34+"px")}} 
-														name="action_text" 
-														value={stateAction.value || ""}
-														onChange={_handleChangeActionText}
-														placeholder={stateAction.placeholder || listActionsObj.defaultValues.placeholder}
-														className={`form-control ${(stateAction.readOnly || listActionsObj.defaultValues.readOnly) ? "readonly" : ""}`} 
-														required={stateAction.required || listActionsObj.defaultValues.required} 
-														disabled={stateAction.hideInput ? true : false}
-													>{stateAction.value || ""}</textarea> */}
+												<div className={`col ${stateAction.textarea ? "col-12 mt-3 pl-0" : ""}  ${stateAction.hideInput ? "d-none" : ""}`}>
+													{stateAction.textarea
+														? <textarea
+															rows={2}
+															ref={textAreaRef}
+															onKeyDown={tabPress}
+															{...getAttrsElementInputs("action")}
+														>{stateAction.value || ""}</textarea>
+														: <input
+															type={listActionsObj.defaultValues.type || "text"}
+															{...getAttrsElementInputs("action")}
+														/>}
+
 												</div>
 												<div className={`col-auto pl-0 ${stateAction.buttonClick ? "" : "d-none"}`}>
 													<button type="button" className={`btn ${stateDetectionCursor ? "btn-success detecting" : "btn-secondary"}  btn_detect`} onClick={trackCursor} >{stateDetectionCursor ? t("generator.waitingClick") : t("generator.detectClick")}</button>
@@ -466,17 +630,23 @@ export default function Generator({ listActivators, listActions, setListActivato
 											<div className="col">
 												{hotKey.name ? <b className="">{hotKey.name}</b> : ""}
 
-												<p className="p-0 m-0">{hotKey.activator.description} {hotKey.activator.text ? '"' + hotKey.activator.text + '"' : ""}</p>
-												<p className="p-0 m-0">{hotKey.action.description}  {hotKey.action.text ? '"' + hotKey.action.text + '"' : ""}</p>
+												<p className="p-0 m-0">{t("listActivators." + hotKey.activator.value + ".optionDescription")} {hotKey.activator.text ? '"' + hotKey.activator.text + '"' : ""}</p>
+												<p className="p-0 m-0">{t("listActions." + hotKey.action.value + ".optionDescription")}  {hotKey.action.text ? '"' + hotKey.action.text + '"' : ""}</p>
 											</div>
 											<div className="col-auto">
-												<div class="dropdown">
-													<button class="btn btn-light dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-													<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-														<a class="dropdown-item" onClick={() => { setListHotKeys.remove(index); }} >
-															<i className="fas fa-trash mr-2"></i>
+												<div className="dropdown">
+													<button className="btn btn-light btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+														<i class="fas fa-cog"></i>
+													</button>
+													<div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+														<span className="dropdown-item" onClick={() => { setListHotKeys.remove(index); }} >
+															<i className="fas fa-trash"></i>
 															{t("generator.deleteHotkey")}
-														</a>
+														</span>
+														<span className="dropdown-item" onClick={() => { setStateModalDeveloping(true); }} >
+															<i className="fas fa-edit"></i>
+															{t("generator.editHotkey")}
+														</span>
 													</div>
 												</div>
 											</div>
@@ -500,16 +670,8 @@ export default function Generator({ listActivators, listActions, setListActivato
 				</div>
 			</div>
 
-			{/* <Modal state={stateModal} setState={setStateModal} title="Configura tu archivo de hotkeys" >
-				<div className="row">
-					<div className="col">
-					</div>
-					<div className="col">
-							
-					</div>
-				</div>
-			</Modal> */}
+			<ModalDeveloping show={stateModalDeveloping} setState={setStateModalDeveloping} />
+			<ModalFirstHotkey show={stateModalFirstHotkey} setState={setstateModalFirstHotkey} />
 		</section>
 	);
 }
-

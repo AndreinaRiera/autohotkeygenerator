@@ -6,18 +6,16 @@ import { useTranslation, Trans } from 'react-i18next';
 import { Quote } from '../../components/utils/Quote';
 //import SideAd           from '../../components/utils/SideAd';
 
-import Header from '../../components/home/Header';
 import CarouselMessages from '../../components/home/CarouselMessages';
 import ListItemsGenerator from '../../components/home/ListItemsGenerator';
 import FAQ from '../../components/home/FAQ';
 import Contact from '../../components/home/Contact';
-import Footer from '../../components/home/Footer';
 import Steps from './Steps';
 
 import Generator from '../../components/common/Generator';
 
 export default function Home() {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   const [listActivators, setListActivators] = useState({});
   const [listActions, setListActions] = useState({});
@@ -25,8 +23,7 @@ export default function Home() {
   const createTrans = (name) => <Trans i18nKey={"home." + name} components={{ strong: <strong /> }} />;
 
   return (
-    <div id="App">
-      <Header />
+    <div id='home'>
       <CarouselMessages />
 
       <div className="container mt-4 pt-4">
@@ -40,7 +37,8 @@ export default function Home() {
 
         <Steps number="1" step={createTrans("stepDownload")}>
           <div className="col-12 col-md-auto text-center">
-            <a href="https://www.autohotkey.com/" target="_blank" className="btn btn-secondary  btn_download" >{t("home.download")}</a>
+            <a href="https://www.autohotkey.com/download/ahk-install.exe" target="_blank" rel="noopener noreferrer" className="btn btn-secondary mt-3 mr-3 btn_download" >{t("home.download")}</a>
+            <a href="https://www.autohotkey.com/" target="_blank" className="btn btn-secondary mt-3" >{t("home.officialPage")}</a>
           </div>
         </Steps>
 
@@ -87,7 +85,6 @@ export default function Home() {
 
 
       <Contact />
-      <Footer />
     </div>
   );
 }

@@ -6,11 +6,15 @@
  * ---------------------------------------------- */
 
 
-@mixin animation($animation, $duration, $method: ease, $fill: both) {
+@mixin animation($animation, $duration, $method: ease, $fill: both, $direction: normal) {
   animation-name: $animation;
-  animation-duration: $duration + s;
   animation-timing-function: $method;
   animation-fill-mode: $fill;
+  animation-direction: $direction;
+
+  &:not(.animation-slow):not(.animation-fast):not([data-animation-duration]){
+    animation-duration: $duration + s;
+  }
 
   &.animation-slow {
     animation-duration: ($duration * 0.6) + s;
@@ -19,9 +23,13 @@
   &.animation-fast {
     animation-duration: ($duration * 1.3) + s;
   }
-
+  
   &[data-animation-duration] {
     animation-duration: attr(animation-duration) + s;
+  }
+
+  &.infinite {
+    animation-iteration-count: infinite;
   }
 }
 
@@ -66,6 +74,28 @@
 
 
   /* ATTENTION */
+
+
+
+  /**
+ * ----------------------------------------
+ * animation heartbeat
+ * ----------------------------------------
+ */
+
+  &.heartbeat {
+    @include animation(heartbeat, 0.4, ease-in, both, alternate);
+  }
+
+  @include keyframes(heartbeat) {
+    0% {
+      @include transform( scale(0.8));
+    }
+    100% {
+      @include transform( scale(1.1));
+    }
+  }
+
 
 
 
@@ -118,39 +148,6 @@
 
 
 
-  /**
-  * ----------------------------------------
-  * animation heartbeat
-  * ----------------------------------------
-  */
-
-  &.heartbeat {
-    @include animation(heartbeat, 1.5, ease-in-out, both)
-  }
-
-  @include keyframes(heartbeat) {
-    from {
-      @include transform( scale(1));
-      @include transform-origin( center center);
-      animation-timing-function: ease-out;
-    }
-    10% {
-      @include transform( scale(0.91));
-      animation-timing-function: ease-in;
-    }
-    17% {
-      @include transform( scale(0.98));
-      animation-timing-function: ease-out;
-    }
-    33% {
-      @include transform( scale(0.87));
-      animation-timing-function: ease-in;
-    }
-    45% {
-      @include transform( scale(1));
-      animation-timing-function: ease-out;
-    }
-  }
 
 
 
@@ -236,39 +233,6 @@
 
 
 
-/**
- * ----------------------------------------
- * animation heartbeat
- * ----------------------------------------
- */
-
-&.heartbeat {
-    @include animation(heartbeat, 1.5, ease-in-out, both)
-  }
-
- @include keyframes(heartbeat) {
-  from {
-    @include transform( scale(1) );
-    @include transform-origin( center center);
-    animation-timing-function: ease-out;
-  }
-  10% {
-    @include transform( scale(0.91) );
-    animation-timing-function: ease-in;
-  }
-  17% {
-    @include transform( scale(0.98) );
-    animation-timing-function: ease-out;
-  }
-  33% {
-    @include transform( scale(0.87) );
-    animation-timing-function: ease-in;
-  }
-  45% {
-    @include transform( scale(1) );
-    animation-timing-function: ease-out;
-  }
-}
 
 
 

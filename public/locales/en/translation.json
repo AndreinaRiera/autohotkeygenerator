@@ -9,11 +9,12 @@
     "AutoHotkey"          : "AutoHotkey is a free, open-source scripting language for Windows that allows users to easily create small to complex scripts for all kinds of tasks such as: form fillers, auto-clicking, macros, etc..",
     "AutoHotkeyCite"      : "AutoHotKey official site",
     "stepDownload"        : "If you haven't done so yet, <strong> download autohotkey </strong> from its official website. And follow the steps until you install it successfully.",
-    "download"            : "Go to the official page",
+    "download"            : "Download",
+    "officialPage"        : "Go to the official page",
     "stepCreate"          : "<strong> Now is the time to create your shortcuts! </strong> Use the generator below to add the description of your shortcut, then the trigger that will trigger the action, and finally what you want to happen. When finished, press the button to create the hotkey. You can add as many hotkeys as you want. When finished, press the button to generate and download your AHK file",
     "altImgFile"          : "File image named myHotkeys.ahk",
     "stepRunAutomatically": "To run your hotkeys you just have to double-click on the file you created. But doing that every time you start the computer would be unproductive! Therefore, <strong> we are going to configure it to start automatically. </strong> <br /> <br /> The first thing you should do is create a shortcut to the ahk file that you created earlier, with all your shortcuts. For this, right click on the file and press \"create direct access \". <br /> <br /> For windows 11 or windows 10, press the Windows key together with the letter R key (<kbd> ⌘ </kbd> + <kbd> R </kbd>). The \"run \" window will open where you must write \"shell: startup \" (without the quotes). That in turn will open a file manager window, where you must place the shortcut to your hotkey file. Cut the shortcut you created earlier, and paste it into the folder that opened.",
-    "stepReady"           : "<strong> Your shortcuts are ready! </strong> And you can have as many shortcuts and hotkeys running as you want! There are never too many! <br /> Remember that <strong> if you download a new file </strong> of hotkeys to update them, <strong> you must repeat step 3 again</strong>.  To make sure that those hotkeys will also run automatically every time you start Computer."
+    "stepReady"           : "<strong> Your shortcuts are ready!</strong> And you can have as many shortcuts and hotkeys running as you want! There are never too many! <br /> Remember that <strong> if you download a new file </strong> of hotkeys to update them, <strong> you must repeat step 3 again</strong>.  To make sure that those hotkeys will also run automatically every time you start Computer."
   },
 
   "navbar": {
@@ -32,8 +33,7 @@
   "header": {
     "description": "<p> Create hotkeys </p> <p> Improve your productivity </p> <p> Optimize your life </p>",
     "popoverImg" : {
-      "title"  : "This vector is courtesy of",
-      "freepik": "freepik.com",
+      "title"  : "This vector is courtesy of <a>freepik.com</a>",
       "content": "Freepik is a library of copyright-free images, vectors and videos <br /> <br /> With lots of free content for all your projects!"
     }
   },
@@ -50,11 +50,12 @@
   },
 
   "listActivators": {
+    "defaultValues": {
+      "placeholder": "this"
+    },
     "text": {
-      "description"       : "El evento se activara cuando escribas la palabra o frase y luego un caracter final, como punto o coma",
-      "placeholder"       : "this",
-      "description1"      : "The event will be activated when you write the word or phrase and then a",
-      "description2"      : ", as a semicolon",
+      "description"       : "The event will be fired when you type the word or phrase and then a <scrollEndingCharacters> final character</scrollEndingCharacters>, such as a semicolon.",
+      "placeholder"       : "@g.com",
       "optionDescription" : "In writing",
       "defaultValueResult": "text"
     },
@@ -70,7 +71,8 @@
     },
     "change": {
       "description"      : "Change the trigger text to other text. You could create a shortener to write your email!",
-      "optionDescription": "Impersonate by"
+      "optionDescription": "Impersonate by",
+      "placeholder"      : "myCompleteEmail@gmail.com"
     },
     "write": {
       "description"      : "The text you choose will be written automatically",
@@ -86,10 +88,9 @@
       "optionDescription": "Open web page"
     },
     "program": {
-      "description1"     : "Don't you know what the exact path and name of the program is?",
-      "description2"     : "Read the frequently asked questions and learn how!",
+      "description"      : "Don't you know what the exact path and name of the program is? <scrollPath>Read the frequently asked questions and learn how!</scrollPath>",
       "optionDescription": "Open program"
-    },
+    }, 
     "click": {
       "description"      : "A click will be made in the position where the cursor is at that moment",
       "optionDescription": "Click on the current position"
@@ -133,7 +134,18 @@
     "detectClick"             : "Detect",
     "generateAHK"             : "Generate ahk",
     "deleteHotkey"            : "Delete",
-    "withoutHotkeys"          : "You haven't added any hotkeys yet, do you want ideas? Look at her <scroll>frequently asked questions section</scroll> "
+    "editHotkey"              : "Edit",
+    "withoutHotkeys"          : "You haven't added any hotkeys yet, do you want ideas? Look at her <scroll>frequently asked questions section</scroll> ",
+    "generateFile"            : {
+      "title"            : "We know you love productivity, but ...",
+      "html"             : "Generating an empty file will not do at all 😅 <br> Create some useful hotkeys and then generate the file",
+      "footer"           : "Do you need help to generate your first hotkey? <br> See the <a href='#ideas' data-accordion='#ideas' class='link'> FAQ section </a>",
+      "confirmButtonText": "I understand, thank you"
+    },
+    "firstHotkey": {
+      "title": "You created your first file in {{productName}}!",
+      "body" : "<p> Double-click on the file that was generated for you, and test your new hotkeys. </p> <h5> Do you see how easy and fast it is? </h5> <p> You can add as many shortcuts and shorteners as you need. And continuing with the following steps you can configure your file to run automatically when you start the computer. </p> <p> With autohotkey, in addition to the current actions in <b> {{productName}} </b> you can also: </p> <CheckList> <li> read information from documents, such as excel, and integrate it into your hotkeys </li> <li> Interact with web page elements from your own browser </li> <li> Create different actions depending on the program you are in </li> </CheckList> <p > We are constantly working on adding new functions, activators and actions <br /> So imagine all the future possibilities! </p>"
+    }
   },
 
   "listItems": {
@@ -153,11 +165,7 @@
     "ending_characters": {
       "title": "What are final characters and what are they?",
       "cite" : "AutoHotKey official doc",
-      "quote": {
-        "1": "Unless the",
-        "2": "  asterisk option",
-        "3": "  is in effect, you must type a trailing character after an active string's abbreviation to activate it. The final characters initially consist of the following:"
-      }
+      "quote": "Unless the <scroll>asterisk option</scroll> is in effect, you must type a trailing character after the abbreviation of an active string to activate it. The final characters initially consist of the following:"
     },
     "asterisk_option": {
       "title"    : "What is the asterisk option?",
@@ -192,5 +200,88 @@
       "made"         : "Made with",
       "by"           : "by and for lovers of productivity"
     }
+  },
+
+  "socialNetworks": {
+  },
+
+  "developing": {
+    "title": "Ush, functionality in development!",
+    "body" : "<p> We are working hard to add more and more great features. So don't worry, it will be available very soon! </p> <p> We have many plans for the future, you can see some of them from the <updates> future updates </updates> section. </p> <p> Autohotkey Generator is developed by an independent team, so we need your help to continue growing. </p> <p> You can support us by <buymeacoffee> buymeacoffee.com</buymeacoffee>, where we upload exclusive content for our sponsors . </p> <p> You can also follow us on <twitter> twitter </twitter> Each tweet mentioning us adds a lot! </p>"
+  },
+
+  "newsletterForm": {
+    "label"      : "Subscribe to the email newsletter",
+    "subtitle"   : "So we will keep you informed of new updates. But don't worry, we won't send excessive mail or spam.",
+    "placeholder": "email address",
+    "btn"        : "Subscribe",
+    "modal"      : {
+      "title": "Email newsletter",
+      "body" : "<p> We are constantly adding new functions and amazing features. Stay up-to-date with <b> {{productName}} </b> news! </p>"
+    }
+  },
+
+  "updates": {
+    "title"   : "Future updates",
+    "subtitle": "<p> These are our future plans for <b> {{productName}}</b>! </p> <p> If you want to keep up to date with releases and updates subscribe to the <newsletter> email newsletter. </newsletter> </p>",
+
+    "versions": {
+      "edition": {
+        "title"      : "Hotkey edition",
+        "description": "Edit your created hotkeys without writing them again"
+      },
+      "accounts": {
+        "title"      : "User accounts",
+        "description": "Store all your created hotkeys in your personal account, then you can edit or delete them from there"
+      },
+      "multiplesActions": {
+        "title"      : "Multiple actions for the same activator",
+        "description": "Add more than one action for the same shortcut or hotkey"
+      },
+      "activeWindow": {
+        "title"      : "activators according to the active window",
+        "description": "Create global hotkeys and also specific hotkeys for each program"
+      },
+      "iterations": {
+        "title"      : "Loops and iterations",
+        "description": "Go through each of the rows of an excel file and integrate it into your activators and actions"
+      },
+      "desktop": {
+        "title"      : "Desktop application",
+        "description": "Never again will you have to download your AHK files and configure them yourself! Manage everything from the desktop application"
+      },
+      "browser": {
+        "title"      : "Automate your interaction with the browser",
+        "description": "Create routines, shortcuts and loops to interact with different elements on web pages"
+      }
+    },
+
+    "footer": "<p> The future of <b> {{productName}} </b> is exceptional! Right? </p> <p> But for all this to be possible we need a solid community of productivity lovers to join us </p> <p> You can follow us on <twitter> twitter </twitter> and sponsor us from <buymeacoffee> buymeacoffee </buymeacoffee> </p>"
+  },
+
+
+  "resources": {
+    "title"    : "Technologies and resources used",
+    "resources": {
+      "react"      : "The {{productName}} website is built with the open source Javascript library \"React\" y comenzo con un poderoso \"create-react-app\".",
+      "i18n"       : "Select the language you prefer! Thanks to react-i18next we implement the multilanguage system easily",
+      "bootstrap"  : "The initial design template is built with the bootstrap library as a base, making use of react-bootstrap for access via react",
+      "autohotkey" : "All activators and actions work thanks to the windows program Autohotkey. And the templates for its creation are based on the official documentation.",
+      "craco"      : "The code routes of the web are ordered and are structured and scalable thanks to craco and its customizable routes.",
+      "animista"   : "The animations and transitions are developed based on CSS code provided by animista",
+      "select"     : "Selector design and functionality courtesy of react-select",
+      "sass"       : "The stylesheets are developed in SCSS interpreted by sass",
+      "sweetalert2": "The confirmation, warning and error popup messages are created with sweetalert2",
+      "freepik"    : "Some images and vectors used are courtesy of the Freepik copyright free image bank",
+      "pixabay"    : "The sound effects, as well as some images are courtesy of the bank of images and sounds free of copyright pixabay",
+      "termsfeed"  : "The terms and conditions of use of {{productName}} were provided free of charge by Termsfeed from its official website"
+    }
+  },
+
+
+  "crowdfunding": {
+    "title": "Sponsor to <b>{{productName}}</b>!",
+    "text": "<p> Autohotkey Generator is developed by an independent team, so we need your help to fulfill our <updates> plans for future versions. </updates> </p> <p> You can support us by <buymeacoffee> buymeacoffee.com</buymeacoffee>, where we upload exclusive content for our sponsors. </p> <p> You can also follow us on <twitter> twitter</twitter>. Each tweet mentioning us adds a lot! </p>",
+    "contact": "<p> If you want to collaborate with us, or be part of the development team, please contact us by email at <mailto> {{email}} </mailto>. </p> <p> We will be happy to answer you ! </p>"
   }
 }

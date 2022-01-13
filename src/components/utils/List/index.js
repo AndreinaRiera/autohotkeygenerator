@@ -7,3 +7,11 @@ export function NumericList({ children }) {
         </ol>
     )
 }
+
+export function CheckList({ className, children, size }) {
+    return (
+        <ul className={`check_list ${className} ${size}`}>
+            {children}
+        </ul>
+    )
+}

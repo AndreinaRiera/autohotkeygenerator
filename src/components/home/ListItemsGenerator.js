@@ -3,7 +3,7 @@ import { getCurrentLocale, autohotkey } from "../../i18n/list";
 
 import Table from 'react-bootstrap/Table'
 
-import { openURL, isValidURL } from '../../utils/utils'
+import { openURL, isValidURL } from '@functions/utils'
 
 
 export default function ListItemsGenerator({ activators, actions }) {
@@ -49,7 +49,7 @@ export default function ListItemsGenerator({ activators, actions }) {
             });
         }
 
-        return <Table striped bordered hover size="sm" className='my-5'>
+        return <Table  bordered hover size="sm" className='my-5'>
             <thead>
                 <tr className="table-secondary">
                     <th style={{ width: "70px" }}> {listItems.length} </th>

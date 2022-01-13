@@ -9,11 +9,19 @@ footer{
     }
 
     .details{
+        h5{
+            color: $color-primary-dark;
+        }
+
         p{
             font-size: 0.9rem;
             color: $color-secondary-light;
             font-weight: 500;
             margin: 5px 0;
+
+            a.active{
+                font-weight: bolder !important;
+            }
         }
     }
 }

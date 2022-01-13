@@ -1,9 +1,10 @@
-import { goTo, openElementAccordion } from '../../utils/utils.js';
+import { goTo, openElementAccordion } from '@functions/utils';
 
 export function Scroll(props) {
-    var { to, className, children } = props;
+    var { to, className, children} = props;
 
     var dataAccordion = props.hasOwnProperty('accordion') ? to : "";
+    var link = (props.hasOwnProperty('link') && (props.link === false)) ? "" : "link";
 
     function scrollTo(e) {
         e.preventDefault();
@@ -16,6 +17,6 @@ export function Scroll(props) {
     }
 
     return (
-        <a href={to} className={`${className} link`} onClick={scrollTo} data-accordion={dataAccordion}>{children}</a>
+        <a href={to} className={`${className} ${link}`} onClick={scrollTo} data-accordion={dataAccordion}>{children}</a>
     )
 }

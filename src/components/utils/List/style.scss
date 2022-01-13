@@ -1,17 +1,36 @@
 @import '../../../styles/variables';
 
 ol.numeric_awesome {
-    list-style: none;
-    counter-reset: my-awesome-counter;
-  
-    li {
-      counter-increment: my-awesome-counter;
-  
-      &::before {
-        content: counter(my-awesome-counter) ". ";
-        color: $color-secondary-dark;
-        font-size: 18px;
-        font-weight: bold;
-      }
+  list-style: none;
+  counter-reset: my-awesome-counter;
+
+  li {
+    counter-increment: my-awesome-counter;
+
+    &::before {
+      content: counter(my-awesome-counter) ". ";
+      color: $color-secondary-dark;
+      font-size: 18px;
+      font-weight: bold;
     }
   }
+}
+
+
+ul.check_list{
+  list-style-type: none;
+  margin: 0 0 0 18px;
+  padding: 0;
+  line-height: 17px;
+
+  &.small{
+    font-size: 13px;
+  }
+
+  li:before {
+    content: '✓';
+    margin-right: 8px;
+    color: green;
+    font-size: 23px;
+  }
+}

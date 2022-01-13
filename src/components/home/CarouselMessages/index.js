@@ -1,7 +1,7 @@
 import './style.scss';
 import { useTranslation } from 'react-i18next';
 
-import { Scroll } from '../../utils/Scroll';
+import { Scroll } from '@helpfulComponents/Scroll';
 
 export default function CarouselMessages() {
     const { t } = useTranslation();

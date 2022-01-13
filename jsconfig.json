@@ -1,0 +1,17 @@
+{ 
+    "compilerOptions": {
+        "compilerOptions": {
+            "baseUrl": "./"
+        },
+        "exclude": ["node_modules", "build"],
+        "include": ["src"],
+        "paths"  : {
+            "@functions"        : ["src/utils/"],
+            "@i18n"             : ["src/i18n/"],
+            "@commonComponents" : ["src/components/common/"],
+            "@helpfulComponents": ["src/components/utils/"],
+            "@hooks"            : ["src/hooks/"]
+        }
+    }
+}
+

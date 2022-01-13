@@ -4,12 +4,13 @@
   "actions"       : "Acciones",
   "action"        : "Accion",
   "finalCharacter": "caracter final",
-
+  
   "home": {
     "AutoHotkey"          : "AutoHotkey es un lenguaje de secuencias de comandos de código abierto y gratuito para Windows, que permite a los usuarios crear fácilmente secuencias de comandos pequeñas o complejas para todo tipo de tareas como: rellenos de formularios, clics automáticos, macros, etc.",
     "AutoHotkeyCite"      : "Traducido del sitio oficial de autohotkey",
     "stepDownload"        : "Si aun no lo has hecho, <strong>descarga autohotkey</strong> desde su pagina oficial. Y sigue los pasos hasta instalarlo correctamente. ",
-    "download"            : "Ir a la pagina oficial",
+    "download"            : "Descargar",
+    "officialPage"        : "Ir a la pagina oficial",
     "stepCreate"          : "<strong>¡Ahora es momento de crear tus atajos!</strong> Utiliza el generador de abajo para agregar la descripcion de tu atajo, luego el activador que desencadenara la accion, y por ultimo lo que quieres que ocurra. Al terminar, presiona el boton para crear el hotkey. Puedes agregar tantos hotkeys como quieras. Al terminar presiona el boton para generar y descargar tu archivo AHK",
     "altImgFile"          : "Imagen de archivo llamado myHotkeys.ahk",
     "stepRunAutomatically": "Para ejecutar tus hotkeys solo tienes que hacer dobleclick sobre el archivo que creaste. ¡Pero hacer eso cada vez que inicies la computadora seria improductivo! Por eso, <strong> vamos a configurarlo para que se inicie automaticamente. </strong> <br /><br /> Lo primero que debes hacer es crear un acceso directo al archivo ahk que creaste antes, con todos tus atajos. Para esto haz click derecho sobre el archivo y presiona \"crear acceso directo\". <br /><br /> Para windows 11 o windows 10, pulsa la tecla Windows junto con la tecla de la letra R  (<kbd>⌘</kbd> + <kbd>R</kbd>). Se abrira la ventana de \"ejecutar\" donde debes escribir \"shell:startup\" (sin las comillas). Eso a su vez abrira una ventana del administrador de archivos, donde debes colocar el acceso directo a tu archivo de hotkeys. Corta el acceso directo que creaste antes, y pegalo en la carpeta que se abrio.",
@@ -32,8 +33,7 @@
   "header": {
     "description": "<p>Crea hotkeys</p><p>Mejora tu productividad</p><p>Optimiza tu vida</p>",
     "popoverImg" : {
-      "title"  : "Este vector es cortesia de ",
-      "freepik": "freepik.es",
+      "title"  : "Este vector es cortesia de <a>freepik.es</a>",
       "content": "<p>Freepik es una biblioteca de imagenes, vectores y videos libres de copyright</p> <p>¡Con mucho contenido gratis para todos tus proyectos!</p>"
     }
   },
@@ -54,8 +54,8 @@
       "placeholder": "esto"
     },
     "text": {
-      "description"       : "El evento se activara cuando escribas la palabra o frase y luego un <scroll> caracter final </scroll>, como punto o coma",
-      "placeholder"       : "esto",
+      "description"       : "El evento se activara cuando escribas la palabra o frase y luego un <scrollEndingCharacters>caracter final</scrollEndingCharacters>, como punto o coma",
+      "placeholder"       : "@g.com",
       "optionDescription" : "Al escribir",
       "defaultValueResult": "texto"
     },
@@ -71,7 +71,8 @@
     },
     "change": {
       "description"      : "Cambia el texto activador por otro texto. ¡Podrias crear un acortador para escribir tu correo electronico!",
-      "optionDescription": "Suplantar por"
+      "optionDescription": "Suplantar por",
+      "placeholder"      : "miCorreoCompleto@gmail.com"
     },
     "write": {
       "description"      : "El texto que elijas se escribira automaticamente",
@@ -87,8 +88,7 @@
       "optionDescription": "Abrir pagina web"
     },
     "program": {
-      "description1"     : "¿No sabes cual es la ruta y nombre exacto del programa?",
-      "description2"     : "¡Lee las preguntas frecuentes y aprende como!",
+      "description"      : "¿No sabes cual es la ruta y nombre exacto del programa? <scrollPath>¡Lee las preguntas frecuentes y aprende como!</scrollPath>",
       "optionDescription": "Abrir programa"
     },
     "click": {
@@ -134,7 +134,18 @@
     "detectClick"             : "Detectar",
     "generateAHK"             : "Generar ahk",
     "deleteHotkey"            : "Borrar",
-    "withoutHotkeys"          : "Aun no has agregado hotkeys, ¿Quieres ideas? Mira la <scroll> seccion de preguntas frecuentes </scroll> "
+    "editHotkey"              : "Editar",
+    "withoutHotkeys"          : "Aun no has agregado hotkeys, ¿Quieres ideas? Mira la <scroll> seccion de preguntas frecuentes </scroll> ",
+    "generateFile"            : {
+      "title"            : "Sabemos que te encanta la productividad, pero...",
+      "html"             : "Generar un archivo vacio no servira en absoluto 😅 <br> Crea algunos hotkeys utiles y luego genera el archivo",
+      "footer"           : "¿Necesitas ayuda para generar tu primer hotkey? <br> Mira la <a href='#ideas' data-accordion='#ideas' class='link'> seccion de preguntas frecuentes</a>",
+      "confirmButtonText": "Entiendo, gracias"
+    },
+    "firstHotkey": {
+      "title": "¡Creaste tu primer archivo en {{productName}}!",
+      "body" : "<p> Haz doble-click sobre el archivo que se genero para ti, y prueba tus nuevos hotkeys. </p><h5>¿Ves que facil y rapido es?</h5><p>Puedes agregar tantos atajos y acortadores como necesites. Y continuando con los pasos siguientes puedes configurar tu archivo para que se ejecute automaticamente al iniciar la computadora. </p><p>Con autohotkey, ademas de las acciones actuales en <b>{{ productName }}</b> tambien puedes: </p><CheckList>    <li>leer la informacion de documentos, como excel, e integrarlo en tus hotkeys</li>    <li>Interactuar con elementos de paginas web desde tu mismo navegador</li>    <li>Crear acciones diferentes dependiendo del programa en el que te encuentres</li></CheckList><p>Estamos trabajando constantemente para agregar nuevas funciones, activadores y acciones <br /> ¡Asi que imagina todas las futuras posibilidades! </p>"
+    }
   },
 
   "listItems": {
@@ -153,12 +164,8 @@
     },
     "ending_characters": {
       "title": "¿Que son los caracteres finales y cuales son? ",
-      "cite" : "AutoHotKey official doc",
-      "quote": {
-        "1": "A menos que la ",
-        "2": " opción de asterisco",
-        "3": " esté en vigor, debe escribir un carácter final después de la abreviatura de una cadena activa para activarla. Los caracteres finales inicialmente consisten en lo siguiente:"
-      }
+      "cite" : "AutoHotKey oficial doc",
+      "quote": "A menos que la <scroll>opción de asterisco</scroll>  esté en vigor, debe escribir un carácter final después de la abreviatura de una cadena activa para activarla. Los caracteres finales inicialmente consisten en lo siguiente:"
     },
     "asterisk_option": {
       "title"    : "¿Que es la opcion de asterisco? ",
@@ -193,5 +200,87 @@
       "made"         : "Hecho con",
       "by"           : "por y para amantes de la productividad"
     }
+  },
+
+  "socialNetworks": {
+  },
+
+  "developing": {
+    "title": "¡Ush, funcion en desarrollo!",
+    "body" : "<p>Estamos trabajando arduamente para agregar cada vez mas y mas funciones fantasticas. ¡Asi que no te preocupes, porque muy pronto estara disponible!</p><p>Tenemos muchos planes para el futuro, puedes ver algunos de ellos desde la seccion de <updates>futuras actualizaciones</updates>.</p><p>Autohotkey Generator esta desarrollado por un equipo independiente, asi que necesitamos de tu ayuda para seguir creciendo.</p><p>Puedes apoyarnos por <buymeacoffee>buymeacoffee.com</buymeacoffee>, donde subimos contenido exclusivo para nuestros patrocinadores. </p><p>Tambien puedes seguirnos por <twitter>twitter</twitter> ¡Cada tweet mencionandonos suma mucho!</p>"
+  },
+
+  "newsletterForm": {
+    "label"      : "Subscribete al boletin de correo electronico",
+    "subtitle"   : "Asi te mantendremos al tanto de nuevas actualizaciones. Pero no te preocupes, no enviaremos correo excesivo ni spam",
+    "placeholder": "correo electronico",
+    "btn"        : "Suscribirme",
+    "modal"      : {
+      "title": "Boletin de correo electronico",
+      "body" : "<p>Estamos agregando nuevas funciones y caracteristicas asombrosas constantemente. ¡Mantente informado de las novedades de <b>{{ productName }}</b>!</p>"
+    }
+  },
+
+  "updates": {
+    "title"   : "Futuras actualizaciones",
+    "subtitle": "<p>¡Estos son nuestros planes futuros para <b>{{ productName }}</b>!</p><p> Si quieres mantenerte al tanto de los lanzamientos y actualizaciones suscribete al <newsletter> boletin de correo electronico.</newsletter></p>",
+
+    "versions": {
+      "edition": {
+        "title"      : "Edicion de hotkeys",
+        "description": "Edita tus hotkeys creados sin escribirlos nuevamente"
+      },
+      "accounts": {
+        "title"      : "Cuentas de usuario",
+        "description": "Almacena en tu cuenta personal todos tus hotkeys creados, luego podras editarlos o eliminarlos desde alli"
+      },
+      "multiplesActions": {
+        "title"      : "Multiples acciones para el mismo activador",
+        "description": "Agrega mas de una accion para el mismo atajo o hotkey"
+      },
+      "activeWindow": {
+        "title"      : "Activadores segun la ventana activa",
+        "description": "Crea hotkeys globales y tambien hotkeys especificos para cada programa"
+      },
+      "iterations": {
+        "title"      : "Bucles e iteraciones",
+        "description": "Recorre cada uno de las filas de un archivo excel e integralo en tus activadores y acciones"
+      },
+      "desktop": {
+        "title"      : "Aplicacion de escritorio",
+        "description": "¡Nunca mas tendras que descargar tus archivos AHK y configurarlos tu mismo! Gestiona todo desde la aplicacion de escritorio"
+      },
+      "browser": {
+        "title"      : "Automatiza tu interaccion con el navegador",
+        "description": "Crea rutinas, accesos directos y bucles para interactuar con diferentes elementos en paginas web"
+      }
+    },
+
+    "footer": "<p>¡El futuro de <b>{{ productName }}</b> es excepcional! ¿Cierto?</p><p>Pero para que todo esto sea posible necesitamos de una comunidad solida de amantes de la productividad que se unan a nosotros</p><p>Puedes seguirnos en <twitter>twitter</twitter>  y patrocinarnos desde <buymeacoffee>buymeacoffee</buymeacoffee> </p>"
+  },
+
+  "resources": {
+    "title"    : "Tecnologias y recursos utilizados",
+    "resources": {
+      "react"      : "La web de {{productName}} esta construida con la libreria Javascript de codigo abierto \"React\" y comenzo con un poderoso \"create-react-app\".",
+      "i18n"       : "¡Selecciona el idioma que prefieras! Gracias a react-i18next implementamos el sistema multilenguaje facilmente",
+      "bootstrap"  : "La plantilla de diseño inicial esta construida con la libreria bootstrap como base, haciendo uso de react-bootstrap para su acceso mediando react",
+      "autohotkey" : "Todos los activadores y acciones funcionan gracias al programa de windows Autohotkey. Y las plantillas para su creacion estan basadas en la documentacion oficial. ",
+      "craco"      : "Las rutas del codigo de la web estan ordenadas y se mantienen estructuras y escalables gracias a craco y sus rutas personalizables. ",
+      "animista"   : "Las animaciones y transiciones estan desarrolladoras en base a codigo CSS proporcionado por animista",
+      "select"     : "El diseño y funcionalidad de los selectores es cortesia de react-select",
+      "sass"       : "Las hojas de estilos estan desarrolladoras en SCSS interpretadas por sass",
+      "sweetalert2": "Los mensajes emergentes de confirmacion, advertencia y error estan creados con sweetalert2",
+      "freepik"    : "Algunas imagenes y vectores utilizados son cortesia del banco de imagenes libres de copyright Freepik ",
+      "pixabay"    : "Los efectos de sonido, al igual que algunas imagenes son cortesia del banco de imagenes y sonidos libres de copyright pixabay ",
+      "termsfeed"  : "Los terminos y condiciones de uso de {{productName}} fueron proporcionados de manera gratuita por Termsfeed desde su web oficial"
+    }
+  },
+
+
+  "crowdfunding": {
+    "title": "¡Patrocina a <b>{{productName}}</b>!",
+    "text": "<p>Autohotkey Generator esta desarrollado por un equipo independiente, asi que necesitamos de tu ayuda para cumplir con nuestros <updates>planes para futuras versiones.</updates></p><p>Puedes apoyarnos por <buymeacoffee>buymeacoffee.com</buymeacoffee>, donde subimos contenido exclusivo para nuestros patrocinadores. </p><p>Tambien puedes seguirnos por <twitter>twitter</twitter> ¡Cada tweet mencionandonos suma mucho!</p>",
+    "contact": "<p>Si quieres realizar alguna colaboracion con nosotros, o formar parte del equipo de desarrollo por favor contactanos por correo electronico a <mailto>{{ email }}</mailto>.</p><p>¡Estaremos felices de responderte!</p>"
   }
 }

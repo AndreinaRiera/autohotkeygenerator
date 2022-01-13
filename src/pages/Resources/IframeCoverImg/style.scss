@@ -1,0 +1,105 @@
+.iframe-cover{
+    position: relative;
+    width   : 100%;
+    cursor  : pointer;
+    overflow: hidden;
+      
+       /* Set Cover aka Background-Image */
+    .bg-video{
+        position           : absolute;
+        top                : 0;
+        left               : 0;
+        width              : 100%;
+        height             : 100%;
+        background-repeat  : no-repeat;
+        background-position: center;
+        background-size    : cover;
+        z-index            : 2;
+      }
+      
+       /* Add light shade to make play button visible*/
+      .bg-video::after{ 
+          content         : '';
+          position        : absolute;
+          top             : 0;
+          left            : 0;
+          width           : 100%;
+          height          : 100%;
+          background-color: rgba(0,0,0,0.1);
+          z-index         : 3;
+            }
+      
+      
+      /* The Play-Button using CSS-Only */
+    .bt-play {
+        position               : absolute;
+        top                    : 50%;
+        left                   : 50%;
+        margin                 : -30px 0 0 -30px;
+        display                : inline-block;
+        width                  : 60px;
+        height                 : 60px;
+        background             : rgba(255,255,255,0.7);
+        -webkit-backdrop-filter: blur(10px);
+        border-radius          : 50%;
+        text-indent            : -999em;
+        cursor                 : pointer;
+        z-index                : 2;
+        -webkit-transition     : all .3s ease-out;
+        transition             : all .3s ease-out;
+      }
+      
+      /* The Play-Triangle */
+    .bt-play:after {
+        content           : '';
+        position          : absolute;
+        left              : 50%;
+        top               : 50%;
+        height            : 0;
+        width             : 0;
+        margin            : -12px 0 0 -6px;
+        border            : solid transparent;
+        border-left-color : rgba(0, 0, 0, 0.9);
+        border-width      : 12px 20px;
+        -webkit-transition: all .3s ease-out;
+        transition        : all .3s ease-out;
+      }
+      
+      &:hover .bt-play {
+        transform: scale(1.1);
+      }
+      
+      /* When Class added the Cover gets hidden... */
+      &.open .bg-video{
+        visibility: hidden;
+        opacity   : 0;
+      
+        -webkit-transition: all .6s .8s;
+        transition        : all .6s .8s;
+      }
+      
+      /* and iframe shows up */
+      &.open .video-container{
+        opacity           : 1;
+        -webkit-transition: all .6s .8s;
+        transition        : all .6s .8s;
+      }
+      
+      /* Giving the div ratio of 16:9 with padding */
+      .video-container {
+          position      : relative;
+          width         : 100%;
+          height        : 0;
+          margin        : 0;
+          z-index       : 1;
+          padding-bottom: 56.27198%;
+      }
+      
+      .video-container iframe {
+          position: absolute;
+          top     : 0;
+          left    : 0;
+          width   : 100%;
+          height  : 100%;
+      }
+}

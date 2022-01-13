@@ -1,10 +1,23 @@
 import './style.scss';
-import { useTranslation } from 'react-i18next';
-import { getCurrentLocale, autohotkey, autohotkeyGenerator } from "../../../i18n/list";
+import { NavLink } from "react-router-dom";
+import {useState} from 'react';
 
-import { beautifyURL } from '../../../utils/utils';
+import { useTranslation } from 'react-i18next';
+import { getCurrentLocale, autohotkey, autohotkeyGenerator } from "@i18n/list";
+
+import Animate from '@helpfulComponents/Animate';
+
+import BtnBuymeacoffee from '@commonComponents/BtnBuymeacoffee';
+import ModalNewsletterForm from '@commonComponents/ModalNewsletterForm';
+
+import { Scroll } from '@helpfulComponents/Scroll';
+
+import popupImages from '@functions/popupImages'
+import { beautifyURL } from '@functions/utils';
 
 export default function Footer() {
+    const [stateModalNewsletter, setstateModalNewsletter] = useState(false);
+
     const { t, i18n } = useTranslation();
     const currentLocale = getCurrentLocale(i18n.language);
 
@@ -24,10 +37,33 @@ export default function Footer() {
     const email = product.email.main;
     const address = company.address;
 
-    return (
+    function showPopupImages() {
+        popupImages({
+            src: "",
+            images: [
+                "https://media3.giphy.com/media/Pxj2KTQfem75GWBxjo/giphy.gif?cid=ecf05e4731e15ebee8fff1177fe34cc5325454be3a51faf4&rid=giphy.gif&ct=g",
+                "https://media1.giphy.com/media/NyniJ2Nf2ZzlE8GYsl/200w.webp?cid=ecf05e47686081fc02d6ac2d2159c1cae58983b6609dbc14&rid=200w.webp&ct=g",
+                "https://media4.giphy.com/media/h5p1o4TMGYbyZ2UexI/200w.webp?cid=ecf05e47686081fc02d6ac2d2159c1cae58983b6609dbc14&rid=200w.webp&ct=g",
+                "https://media0.giphy.com/media/5kC4JAjX6ruaZCG2AI/200w.webp?cid=ecf05e47686081fc02d6ac2d2159c1cae58983b6609dbc14&rid=200w.webp&ct=g",
+                "https://media0.giphy.com/media/5kC4JAjX6ruaZCG2AI/200w.webp?cid=ecf05e47686081fc02d6ac2d2159c1cae58983b6609dbc14&rid=200w.webp&ct=g",
+                "https://media0.giphy.com/media/5kC4JAjX6ruaZCG2AI/200w.webp?cid=ecf05e47686081fc02d6ac2d2159c1cae58983b6609dbc14&rid=200w.webp&ct=g",
+                "https://media3.giphy.com/media/13IjZrEsZpEJLW/200w.webp?cid=ecf05e47ac6a94e47530c2831d6d448a6237f407ec23d0b1&rid=200w.webp&ct=g",
+                "https://media3.giphy.com/media/13IjZrEsZpEJLW/200w.webp?cid=ecf05e47ac6a94e47530c2831d6d448a6237f407ec23d0b1&rid=200w.webp&ct=g",
+                "https://media2.giphy.com/media/3tpzkqpbVdshXX1By7/200w.webp?cid=ecf05e47ac6a94e47530c2831d6d448a6237f407ec23d0b1&rid=200w.webp&ct=g",
+                "https://media2.giphy.com/media/3tpzkqpbVdshXX1By7/200w.webp?cid=ecf05e47ac6a94e47530c2831d6d448a6237f407ec23d0b1&rid=200w.webp&ct=g",
+                "https://media2.giphy.com/media/9sEmlm8kV4PSM/giphy.webp?cid=ecf05e47ac6a94e47530c2831d6d448a6237f407ec23d0b1&rid=giphy.webp&ct=g",
+                "https://media1.giphy.com/media/dkhLpFGa1qvYOQgUxk/200w.webp?cid=ecf05e47ac6a94e47530c2831d6d448a6237f407ec23d0b1&rid=200w.webp&ct=g",
+                "https://media1.giphy.com/media/Y0J6LMnBmjJvrjqAYj/200w.webp?cid=ecf05e47ac6a94e47530c2831d6d448a6237f407ec23d0b1&rid=200w.webp&ct=g",
+                "https://media1.giphy.com/media/ld2t4ZrMNNRZYMhof6/200w.webp?cid=ecf05e47ac6a94e47530c2831d6d448a6237f407ec23d0b1&rid=200w.webp&ct=g",
+                
+            ]   
+        })
+    }
+
+    return ( 
         <footer className="bg-success-dark" id="footer">
             <div className="container py-3">
-                <div className="row details mt-4 mb-5">
+                <div className="row details mt-5 pb-3">
                     <div className="col-12 col-md">
                         <h5> {t("footer.socialNetworks")} </h5>
 
@@ -38,7 +74,7 @@ export default function Footer() {
                     <div className="col-12 col-md">
                         <h5> {t("footer.contacts")} </h5>
 
-                        <p><a href="#"> {t("footer.newsletter")} </a></p>
+                        <p className='pointer' onClick={() => { setstateModalNewsletter(true) }}> {t("footer.newsletter")} </p>
                         <address>
                             <p><a href={`mailto:${email}`}>{email}</a></p>
                             <p><a href={`https://www.google.com/maps/place/${address}`} {...blank} > {address}</a></p>
@@ -47,27 +83,24 @@ export default function Footer() {
                     <div className="col-12 col-md">
                         <h5> {t("footer.product")} </h5>
 
-                        <p><a href="#"> {t("footer.documentation")} </a></p>
-                        <p><a href="#"> {t("footer.prices")} </a></p>
-                        <p><a href="#"> {t("footer.terms")} </a></p>
+                        <p><Scroll to="#ideas" accordion={true} link={false}> {t("footer.documentation")}</Scroll></p>
+                        <p className='pointer' onClick={showPopupImages}> {t("footer.prices")} </p>
+                        <p><NavLink to="/terms" className={({ isActive }) => isActive? "active": ''}> {t("footer.terms")} </NavLink></p>
                     </div>
                     <div className="col-12 col-md">
                         <h5> {t("footer.developing")} </h5>
 
-                        <p><a href="#"> {t("footer.resources")} </a></p>
-                        <p><a href="#"> {t("footer.crowdfunding")} </a></p>
-                        <p><a href="#"> {t("footer.updates")} </a></p>
+                        <p><NavLink to="/resources" className={({ isActive }) => isActive? "active": ''}> {t("footer.resources")} </NavLink></p>
+                        <p><NavLink to="/crowdfunding" className={({ isActive }) => isActive? "active": ''}> {t("footer.crowdfunding")} </NavLink></p>
+                        <p><NavLink to="/updates" className={({ isActive }) => isActive? "active": ''}> {t("footer.updates")} </NavLink></p>
                     </div>
                 </div>
 
                 <hr />
 
-                <div className="row ">
+                <div className="row mt-4">
                     <div className="col-12 col-sm-auto ">
-                        <a target="_blank" href={buymeacoffee}>
-                            <img height={33 + "px"}
-                                src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=andreinariera&button_colour=97bfbb&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=FFDD00" />
-                        </a>
+                        <BtnBuymeacoffee />
                     </div>
                     <div className="col-12 col-sm-auto ">
                         <a href={`${documentationURL}/AutoHotkey.htm`} {...blank} className="btn btn-outline-light">
@@ -77,11 +110,15 @@ export default function Footer() {
 
                     <div className="col text-center text-sm-right color-success-light">
                         {t("footer.bottom.made")}
-                        <i className="fas fa-heart mx-2"></i>
+                        <Animate  entrance="heartbeat" iteration="infinite">
+                            <i className="fas fa-heart mx-2"></i>
+                        </Animate>
                         {t("footer.bottom.by")}
                     </div>
                 </div>
             </div>
+
+            <ModalNewsletterForm show={stateModalNewsletter} setState={setstateModalNewsletter} />
         </footer>
     )
 }
