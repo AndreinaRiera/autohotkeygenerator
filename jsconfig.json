@@ -1,4 +1,4 @@
-{ 
+{
     "compilerOptions": {
         "compilerOptions": {
             "baseUrl": "./"
@@ -14,4 +14,3 @@
         }
     }
 }
-
