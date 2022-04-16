@@ -1,70 +1,69 @@
-# Getting Started with Create React App
+# Autohotkeygenerator
+¡APP WEB REACTJS PARA CREAR ARCHIVOS AHK FACILMENTE!
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+URL: https://autohotkeygenerator.herokuapp.com/
 
-## Available Scripts
+____________________________________________________________________________________________________________________
 
-In the project directory, you can run:
 
-### `npm start`
+[autohotkey](https://www.autohotkey.com/) es un lenguaje para window que permite crear rutinas, atajos de teclado, acortadores y automatizar muchas tareas en la PC 
+"The ultimate automation scripting language for Windows."
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Pero...es un lenguaje bastante complejo, que requiere tiempo de aprendizaje y tener en cuenta muchas cosas (como escapar algunos caracteres especiales en los textos, por ejemplo), como cualquier otro lenguaje de programacion. 
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
-### `npm test`
+```
+#NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
+			; #Warn  ; Enable warnings to assist with detecting common errors.
+			SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
+			SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+; Escribir mi correo rapidamente
 
-### `npm run build`
+::@g.com::
+SendRaw, miCorreoGmailCompleto@gmail.com
+return
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+; Escribir mi correo personal rapidamente
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+::p@g.com::
+SendRaw, miCorreoGmailPersonalCompleto@gmail.com
+return
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+¿Entiendes algo de lo que dice arriba? Asi se ve un archivo pequeño en autohotkey. Lo que hace es convertir @g.com en miCorreoGmailCompleto@gmail.com, y p@g.com en miCorreoGmailPersonalCompleto@gmail.com 
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+El objetivo de [autohotkeygenerator](https://autohotkeygenerator.herokuapp.com/) es facilitar la creacion e interaccion con este lenguaje. 
+Desde un formulario facil e intuito puedes agregar la description, el activador y la accion de tu rutina. Agregandola facilmente a tu archivo. Puedes incluir tantas rutinas como quieres, y luego descargar el archivo generado automaticamente por la app. 
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Siguiendo los pasos es muy rapido crear rutinas personalizadas para optimizar tu tiempo en la PC. 
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+![Screenshot1](https://user-images.githubusercontent.com/34286823/163688953-ed018016-ea11-4d2b-a94b-646dbc0a8d31.png)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+_________________________________________________________________________________________________________________________________________
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Todo lo que puedes hacer 
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Con el lenguaje de autohotkey se pueden trabajar con variables, bucles, datos dinamicos extraidos de internet o de tus archivos, interactuar directamente con paginas web en tu navegador, correos electronicos y mucho mas. 
 
-### Code Splitting
+Puedes leer la [documentacion completa aqui](https://www.autohotkey.com/docs/AutoHotkey.htm). 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+En [autohotkeygenerator](https://autohotkeygenerator.herokuapp.com/) he incluido solo algunas de las muchas acciones y activadores posibles.
 
-### Analyzing the Bundle Size
+_________________________________________________________________________________________________________________________________________
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Este es un proyecto personal
 
-### Making a Progressive Web App
+La app web actual fue desarrollada por mi, como demostracion del proyecto general. 
+Espero que en algun momento siga creciendo la idea. 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Si te parece una buena idea, ¡Comentamelo! Seria muy util para mi saberlo. 
 
-### Advanced Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-### `npm run build` fails to minify
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
